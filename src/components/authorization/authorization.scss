@@ -1,0 +1,119 @@
+.authorization{
+    padding: 0 115px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 95dvh;
+
+    &__form{
+        width: 434px;
+        height: 396px;
+        margin-right: 140px;
+        .form__title{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 42px;
+            line-height: 110%;
+            color: #fff;
+            margin-bottom: 32px;
+        }
+
+        .form__inner{
+            width: 100%;
+            height: 95px;
+            margin-bottom: 32px;
+            position: relative;
+
+            .form__label{
+                font-family: "Manrope-Bold", sans-serif;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 144%;
+                color: #fff;
+                margin-bottom: 8px;
+                display: block;
+            }
+
+            .form__input{
+                width: 100%;
+                height: 64px;
+                padding: 21px 16px;
+                border-radius: 15px;
+                border: 1.59px solid #454554;
+                background: #2e2e2e;
+                font-family: "Manrope-Regular", sans-serif;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 144%;
+                color: #fff;
+
+                &::placeholder{
+                    font-family: "Manrope-Regular", sans-serif;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 144%;
+                    color: #fff;
+                }
+            }
+
+            .form__showPass{
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                right: 16px;
+                top: 51px;
+                cursor: pointer;
+                background-color: transparent;
+                border: none;
+                &::before{
+                    content: url('../../../public/images/showPass.svg');
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+
+        .form__btn{
+            width: 100%;
+            height: 64px;
+            border-radius: 10px;
+            padding: 19px 0;
+            cursor: pointer;
+            background: #808080;
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 144%;
+            color: #fff;
+            border: none;
+        }
+    }
+
+    &__logo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        .logo__img{
+            width: 194px;
+            height: 194px;
+            margin-bottom: 26px;
+        }
+
+        .logo__name{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 64px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 26px;
+        }
+
+        .logo__text{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 32px;
+            color: #fff;
+        }
+    }
+}

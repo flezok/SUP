@@ -1,0 +1,175 @@
+.tasks{
+    width: 754px;
+    height: 213px;
+    border-radius: 8px;
+    background-color: #2e2e2e;
+    padding: 16px;
+    margin-bottom: 32px;
+
+    &__title{
+        font-family: "Manrope-Bold", sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 170%;
+        color: #fff;
+        margin-bottom: 12px;
+    }
+
+    &__items{
+        width: 100%;
+        height: 135px;
+        display: flex;
+    }
+
+    &__item{
+        width: 159px;
+        height: 135px;
+        border-radius: 10px;
+        padding: 10px 8px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+
+        &-img{
+            width: 42px;
+            height: 42px;
+            margin-bottom: 15px;
+        }
+
+        &-name{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 114%;
+            color: #808080;
+            margin-bottom: 5px;
+        }
+
+        &-count{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 158%;
+            color: #262626;
+        }
+    }
+
+    &__item + .tasks__item{
+        margin-left: 27px;
+    }
+
+    &__item-priority, .tasks__item-overdue{
+       background-color: #f3f8ed;
+       &::after{
+        content: url('../../../public/images/priorityBg.svg');
+        position: absolute;
+        width: 81px;
+        height: 81px;
+        right: -30px;
+        top: -7px;
+       }
+    }
+
+    &__item-upcoming, .tasks__item-pending{
+        background-color: #e6f7ff;
+        &::after{
+         content: url('../../../public/images/upcomingBg.svg');
+         position: absolute;
+         width: 94px;
+         height: 93px;
+         right: -30px;
+         top: -1px;
+        }
+    }
+
+    .tasks__item-overdue{
+        background-color: #e4e6ff;
+        &::after{
+            content: url('../../../public/images/overdueBg.svg');
+        }
+    }
+
+    .tasks__item-pending{
+        background-color: #ffdccd;;
+        &::after{
+            content: url('../../../public/images/pedngingBg.svg');
+        }
+    }
+}
+
+.visit{
+    width: 754px;
+    height: 320px;
+    border-radius: 8px;
+    background-color: #2e2e2e;
+    padding: 16px;
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 14px;
+
+        &-title{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 170%;
+            color: #fff;
+        }
+
+        &-link{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 144%;
+            color: #c6c6c6;
+            cursor: pointer;
+        }
+    }  
+    
+    &__items{
+        width: 100%;
+        height: 240px;
+        display: flex;
+    }
+
+    &__item{
+        width: 222px;
+        height: 240px;
+        padding: 10px;
+        border: 1px solid #454554;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &-img{
+            width: 202px;
+            height: 110px;
+            margin-bottom: 43px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        &-title{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 144%;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        &-text{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 133%;
+            color: #fff;
+            max-height: 34px;
+            overflow: hidden;
+        }
+    }
+
+    &__item + .visit__item{
+        margin-left: 24px;
+    }
+}

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import './menu.scss'
 
@@ -6,10 +7,10 @@ const Menu = () => {
     const [activeTab, setActiveTab] = useState("home");
 
     const tabs = [
-        { id: "home", label: "Главная", className: "menu__list-home" },
-        { id: "boards", label: "Доски", className: "menu__list-board" },
-        { id: "account", label: "Аккаунт", className: "menu__list-account" },
-        { id: "employees", label: "Сотрудники", className: "menu__list-employees" },
+        { id: "home", label: "Главная", className: "menu__list-home", path: '/'},
+        { id: "boards", label: "Доски", className: "menu__list-board", path: '/boards'},
+        { id: "account", label: "Аккаунт", className: "menu__list-account", path: '/account' },
+        { id: "employees", label: "Сотрудники", className: "menu__list-employees", path: '/employees' }
     ];
 
     return (
@@ -21,15 +22,15 @@ const Menu = () => {
                     </h3>
 
                     {tabs.map((tab) => (
-                            <li
-                            key={tab.id}
-                            className={`menu__list-item ${tab.className} ${
-                                activeTab === tab.id ? "menu__list-item--active" : ""
-                            }`}
-                            onClick={() => setActiveTab(tab.id)} // Обновляем активный таб
+                            <Link   to={tab.path}
+                                    key={tab.id}
+                                    className={`menu__list-item ${tab.className} ${
+                                        activeTab === tab.id ? "menu__list-item--active" : ""
+                                    }`}
+                                    onClick={() => setActiveTab(tab.id)} // Обновляем активный таб
                             >
                             <p className="menu__item-text">{tab.label}</p>
-                            </li>
+                            </Link>
                     ))}
                 </ul>
             </nav>

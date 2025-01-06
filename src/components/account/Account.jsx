@@ -76,8 +76,8 @@ const Account = () => {
 
                         <div className='settings__inner-wrapper'>
                             <div className='settings__inner'>
-                                <label className='settings__label' htmlFor="EmpId">ID Сотрудника</label>
-                                <input className='settings__input' id="EmpId" type="text" placeholder='09-6364' readOnly></input>
+                                <label className='settings__label' htmlFor="PName">Отчество</label>
+                                <input className='settings__input' id="pName" type="text" placeholder='Андреевич' readOnly></input>
                             </div>
 
                             <div className='settings__inner'>

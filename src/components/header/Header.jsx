@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import './header.scss'
 
-const Header = () => {
+const Header = ({ onSearchPopupOpen }) => {
 
 
     return (
@@ -19,7 +19,10 @@ const Header = () => {
 
                 <div className='header__container'>
                     <div className='header__search-wrapper'>
-                        <input className="header__search" type="text" placeholder='Поиск задачи'></input>
+                        <input className="header__search"
+                               type="text" 
+                               placeholder='Поиск задачи'
+                               onFocus={onSearchPopupOpen}></input>
                     </div>
 
                     <div className='header__container-wrapper'>

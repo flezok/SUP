@@ -11,26 +11,26 @@ const Project = () => {
             </h2>
 
             <div className='project__header'>
-                <div className="project__name">
+                <div className="project__name project__header-item">
                     <p className="project__name-text">
                         Разработка приложения
                     </p>
                 </div>
 
-                <div className="project__team">
+                <div className="project__team project__header-item">
                     <div className="project__team-images">
                         <div className="project__team-wrapper-img">
-                            <img className="project__team-img">
+                            <img className="project__team-img" src="../../../public/images/avatar1.png">
 
                             </img>
                         </div>
                         <div className="project__team-wrapper-img">
-                            <img className="project__team-img">
+                            <img className="project__team-img" src="../../../public/images/avatar2.png">
 
                             </img>
                         </div>
                         <div className="project__team-wrapper-img">
-                            <img className="project__team-img">
+                            <img className="project__team-img" src="../../../public/images/avatar3.png">
 
                             </img>
                         </div>
@@ -38,31 +38,31 @@ const Project = () => {
 
                     <button className='project__team-btn'>
                         <p className='project__team-btn-text'>
-
+                            Добавить участника
                         </p>
                     </button>
                 </div>
                 
-                <div className="project__setting">
-                    <button className="project__setting">
+                <div className="project__setting project__header-item">
+                    <button className="project__setting-btn">
                         <p className="project__setting-text">
-                            
+                            Настройки
                         </p>
                     </button>
                 </div>
 
                 <div className="project__date">
-                    <div className="project__date-created">
+                    <div className="project__date-created project__date-container">
                         <p className='project__date-action'>
-
+                            Создан:
                         </p>
                         <p className='project__date-text'>
                             янв 04, 2025
                         </p>
                     </div>
-                    <div className="project__date-deadline">
+                    <div className="project__date-deadline project__date-container">
                         <p className='project__date-action'>
-
+                            Срок:
                         </p>
                         <p className='project__date-text'>
                             сен 25, 2025
@@ -74,12 +74,12 @@ const Project = () => {
             <div className="project__tools">
                 <div className="project__inner">
                     <div className="project__tools-search">
-                        <input className="project__tools-input" type="text"></input>
+                        <input className="project__tools-input" type="text" placeholder='Поиск'></input>
                     </div>
                     <div className="project__tools-sort">
                         <button className="project__sort-btn">
                             <p className="project__sort-btn-text">
-
+                                Стандартная
                             </p>
                         </button>
                         {/* <ul class="dropdown__menu">
@@ -97,67 +97,275 @@ const Project = () => {
             </div>
 
             <div className="project__container">
-                <div className='project__tasks'>
-                    <div className="project__task-stage">
-                        <p className='project__stage-text'>
+                <div className="project__container-wrapper">
+                <div className="project__tasks-wrapper">
 
-                        </p>
-                    </div>
-
-                    <div className="project__task">
-                        <img className="project__task-img"></img>
-                        <div className="project__task-deadline">
-                            <p className="project_-task-deadlint-text">
-
-                            </p>
+                    <div className='project__tasks'>
+                        <div className="project__tasks-stage">
+                            <div className='project__stage-wrapper'>
+                                <div className='project__stage-color'></div>
+                                <p className='project__stage-text'>
+                                    В ожидании
+                                </p>
+                            </div>
+                            <button className='project__stage-btn'></button>
                         </div>
-                        <h3 className='project__task-title'>
 
-                        </h3>
-                        <p className="project__task-text">
-
-                        </p>
-                        <div className="project__task-progress">
-                            <p className="project__task-progress-text">
-
+                        <div className="project__task">
+                            <img className="project__task-img" src="../../../public/images/task.png"></img>
+                            <div className="project__task-deadline">
+                                <p className="project__task-deadline-text">
+                                    06 фев 2025
+                                </p>
+                            </div>
+                            <h3 className='project__task-title'>
+                                Название крутой задачи
+                            </h3>
+                            <p className="project__task-text">
+                                Эта крутая задача с очень длинным описанием тут я что-то написал про эту задачу она реально суперская
                             </p>
-                            <p className="project__task-progress-count">
-                                
-                            </p>
-                        </div>
-                        <div className='project__task-footer'>
-                            <div className="task__footer-stats">
-                                <div className="task__footer-stat">
-                                    <p className="task__footer-count">
-
-                                    </p>
+                            <div className="project__task-progress">
+                                <p className="project__task-progress-text">
+                                    Прогресс:
+                                </p>
+                                <p className="project__task-progress-count">
+                                    0/6
+                                </p>
+                            </div>
+                            <div className='project__task-footer'>
+                                <div className="task__footer-stats">
+                                    <div className="task__footer-stat task__footer-view">
+                                        <p className="task__footer-count">
+                                            4
+                                        </p>
+                                    </div>
+                                    <div className="task__footer-stat task__footer-comment">
+                                        <p className="task__footer-count">
+                                            15        
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="task__footer-stat">
-                                    <p className="task__footer-count">
-                                        
-                                    </p>
+
+                                <div className='task__footer-images'>
+                                    <div className="project__team-images">
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar1.png">
+
+                                            </img>
+                                        </div>
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar2.png">
+
+                                            </img>
+                                        </div>
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar3.png">
+
+                                            </img>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div className='task__footer-images'>
-                                <div className='task__footer-img-wrapper'>
-                                    <img className="task__footer-img"></img>
+                        <div className="project__task">
+                            <img className="project__task-img" src="../../../public/images/task.png"></img>
+                            <div className="project__task-deadline">
+                                <p className="project__task-deadline-text">
+                                    06 фев 2025
+                                </p>
+                            </div>
+                            <h3 className='project__task-title'>
+                                Название крутой задачи
+                            </h3>
+                            <p className="project__task-text">
+                                Эта крутая задача с очень длинным описанием тут я что-то написал про эту задачу она реально суперская
+                            </p>
+                            <div className="project__task-progress">
+                                <p className="project__task-progress-text">
+                                    Прогресс:
+                                </p>
+                                <p className="project__task-progress-count">
+                                    0/6
+                                </p>
+                            </div>
+                            <div className='project__task-footer'>
+                                <div className="task__footer-stats">
+                                    <div className="task__footer-stat task__footer-view">
+                                        <p className="task__footer-count">
+                                            4
+                                        </p>
+                                    </div>
+                                    <div className="task__footer-stat task__footer-comment">
+                                        <p className="task__footer-count">
+                                            15        
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className='task__footer-img-wrapper'>
-                                    <img className="task__footer-img"></img>
-                                </div>
-                                <div className='task__footer-img-wrapper'>
-                                    <img className="task__footer-img"></img>
+
+                                <div className='task__footer-images'>
+                                    <div className="project__team-images">
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar1.png">
+
+                                            </img>
+                                        </div>
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar2.png">
+
+                                            </img>
+                                        </div>
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar3.png">
+
+                                            </img>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <button className="project__tasks-btn">
+                            <p className='project__tasks-btn-text'>
+                                Новая задача
+                            </p>
+                        </button>
                     </div>
 
-                    <button className="project__tasks-btn">
-                        <p className='project__tasks-btn-text'>
-                            Новая задача
-                        </p>
-                    </button>
+                    <div className='project__tasks'>
+                        <div className="project__tasks-stage">
+                            <div className='project__stage-wrapper'>
+                                <div className='project__stage-color'></div>
+                                <p className='project__stage-text'>
+                                    В ожидании
+                                </p>
+                            </div>
+                            <button className='project__stage-btn'></button>
+                        </div>
+
+                        <div className="project__task">
+                            <img className="project__task-img" src="../../../public/images/task.png"></img>
+                            <div className="project__task-deadline">
+                                <p className="project__task-deadline-text">
+                                    06 фев 2025
+                                </p>
+                            </div>
+                            <h3 className='project__task-title'>
+                                Название крутой задачи
+                            </h3>
+                            <p className="project__task-text">
+                                Эта крутая задача с очень длинным описанием тут я что-то написал про эту задачу она реально суперская
+                            </p>
+                            <div className="project__task-progress">
+                                <p className="project__task-progress-text">
+                                    Прогресс:
+                                </p>
+                                <p className="project__task-progress-count">
+                                    0/6
+                                </p>
+                            </div>
+                            <div className='project__task-footer'>
+                                <div className="task__footer-stats">
+                                    <div className="task__footer-stat task__footer-view">
+                                        <p className="task__footer-count">
+                                            4
+                                        </p>
+                                    </div>
+                                    <div className="task__footer-stat task__footer-comment">
+                                        <p className="task__footer-count">
+                                            15        
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className='task__footer-images'>
+                                    <div className="project__team-images">
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar1.png">
+
+                                            </img>
+                                        </div>
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar2.png">
+
+                                            </img>
+                                        </div>
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar3.png">
+
+                                            </img>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="project__task">
+                            <img className="project__task-img" src="../../../public/images/task.png"></img>
+                            <div className="project__task-deadline">
+                                <p className="project__task-deadline-text">
+                                    06 фев 2025
+                                </p>
+                            </div>
+                            <h3 className='project__task-title'>
+                                Название крутой задачи
+                            </h3>
+                            <p className="project__task-text">
+                                Эта крутая задача с очень длинным описанием тут я что-то написал про эту задачу она реально суперская
+                            </p>
+                            <div className="project__task-progress">
+                                <p className="project__task-progress-text">
+                                    Прогресс:
+                                </p>
+                                <p className="project__task-progress-count">
+                                    0/6
+                                </p>
+                            </div>
+                            <div className='project__task-footer'>
+                                <div className="task__footer-stats">
+                                    <div className="task__footer-stat task__footer-view">
+                                        <p className="task__footer-count">
+                                            4
+                                        </p>
+                                    </div>
+                                    <div className="task__footer-stat task__footer-comment">
+                                        <p className="task__footer-count">
+                                            15        
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className='task__footer-images'>
+                                    <div className="project__team-images">
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar1.png">
+
+                                            </img>
+                                        </div>
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar2.png">
+
+                                            </img>
+                                        </div>
+                                        <div className="project__team-wrapper-img">
+                                            <img className="project__team-img" src="../../../public/images/avatar3.png">
+
+                                            </img>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button className="project__tasks-btn">
+                            <p className='project__tasks-btn-text'>
+                                Новая задача
+                            </p>
+                        </button>
+                    </div>
+
+                    
+
                 </div>
 
                 <button className="project__btn">
@@ -165,6 +373,7 @@ const Project = () => {
                         Новый этап
                     </p>
                 </button>
+                </div>
             </div>
         </section>
     )

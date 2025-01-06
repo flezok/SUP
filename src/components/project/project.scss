@@ -1,0 +1,573 @@
+.project{
+    width: 76%;
+
+    &__header-item{
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        &::before{
+            content: '';
+            height: 75px;
+            width: 1px;
+            background-color: #c6c6c6;
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    &__header{
+        width: 100%;
+        height: 134px;
+        border-radius: 8px;
+        background-color: #3d3d3d;
+        display: flex;
+        // justify-content: space-around;
+        align-items: center;
+        padding: 29px;
+        margin-bottom: 23px;
+    }
+
+    &__name{
+        font-family: "Manrope-Bold", sans-serif;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 158%;
+        color: #fff;
+        padding-right: 62px;
+    }
+
+    &__team{
+        display: flex;
+        align-items: center;
+        padding: 0 62px;
+
+        &-images{
+            display: flex;
+            margin-right: 22px;
+        }
+
+        &-wrapper-img{
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-left: -20px; /* Эффект наложения */
+            overflow: hidden;
+            cursor: pointer;
+
+            &:first-child{
+                margin-left: 0;
+            }
+        }
+
+        &-img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        &-btn{
+            border: 1px solid #fff;
+            border-radius: 10px;
+            padding: 8px;
+            width: 220px;
+            height: 40px;
+            background-color: transparent;
+            cursor: pointer;
+
+            &-text{
+                font-family: "Manrope-Bold", sans-serif;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 144%;
+                color: #fff;
+                padding-left: 32px;
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                &::before{
+                    content: url('../../../public/images/addMember.svg');
+                    width: 24px;
+                    height: 24px;
+                    position: absolute;
+                    left: 0px;
+                }
+            }
+        }
+    }
+
+    &__setting{
+        padding: 0 86px;
+    }
+
+    &__setting-btn{
+        border: 1px solid #fff;
+        border-radius: 10px;
+        padding: 8px;
+        width: 145px;
+        height: 40px;
+        background-color: transparent;
+        cursor: pointer;
+
+        .project__setting-text{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 144%;
+            color: #fff;
+            padding-left: 32px;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            &::before{
+                content: url('../../../public/images/settings.svg');
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                left: 0px;
+            }
+        }
+    }
+
+    &__date{
+        padding: 62px;
+
+        &-created{
+            margin-bottom: 5px;
+        }
+
+        &-action{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 144%;
+            color: #808080;
+            margin-bottom: 0px;
+        }
+
+        &-text{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 144%;
+            color: #fff;
+        }
+    }
+
+    &__tools{
+        border-radius: 15px;
+        padding: 10px 42px;
+        width: 100%;
+        height: 60px;
+        background-color: #2e2e2e;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 23px;
+    }
+
+    &__inner{
+        display: flex;
+        
+    }
+
+    &__tools-search{
+        position: relative;
+        margin-right: 10px;
+
+        &::before{
+            content: url('../../../public/images/searchTools.svg');
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            z-index: 111;
+        }
+    }
+
+    &__tools-input{
+        border: 1px solid #454554;
+        border-radius: 8px;
+        padding: 12px 20px 12px 52px;
+        width: 213px;
+        height: 40px;
+        background: #2e2e2e;
+        font-family: "Manrope-Regular", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 114%;
+        color: #fff;
+        position: relative;
+
+        &::placeholder{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 114%;
+            color: #fff;
+        }
+    }
+
+    &__sort-btn{
+        border: 1px solid #454554;
+        border-radius: 8px;
+        padding: 10px 10px 10px 2px;
+        width: 132px;
+        height: 40px;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &-text{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 114%;
+            color: #fff;
+            position: relative;
+
+            &::before{
+                content: url('../../../public/images/dropdown.svg');
+                width: 9px;
+                height: 5px;
+                position: absolute;
+                right: -18px;
+            }
+        }
+    }
+
+    &__member{
+        border: 1px solid #454554;
+        border-radius: 8px;
+        // padding: 10px 20px 10px 56px;
+        width: 180px;
+        height: 40px;
+        background-color: transparent;
+        cursor: pointer;
+
+        &-text{
+            font-family: "Manrope-Medium", sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #fff;
+            position: relative;
+            padding-left: 24px;
+
+            &::before{
+                content: url('../../../public/images/member.svg');
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                left: 20px;
+                top: -4px;
+            }
+        }
+    }
+
+    &__container{
+        min-width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        overflow-x: auto;
+        position: relative;
+        // transform: rotate(-180deg);
+        transform: rotate(180deg); /* Переносит полосу прокрутки наверх страницы */
+
+        .project__container-wrapper{
+            display: flex;
+            transform: rotate(-180deg); 
+        }
+
+        &::-webkit-scrollbar{
+            height: 12px; /* Размер полосы прокрутки */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            // transform: rotateX(180deg);
+        }
+
+        &::-webkit-scrollbar-thumb{
+            background: #888;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover{
+            background: #555;
+        }
+
+        &::-webkit-scrollbar-track{
+            background: #333;
+        }
+    }
+
+    &__tasks{
+        margin-right: 24px;
+        &-stage{
+            border: 1px solid #454554;
+            border-radius: 8px;
+            padding: 10px 20px;
+            width: 202px;
+            height: 40px;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .project__stage-wrapper{
+            display: flex;
+        }
+
+        .project__stage-color{
+            border-radius: 4px;
+            width: 24px;
+            height: 24px;
+            background: #fc6363;
+            margin-right: 12px;
+        }
+
+        .project__stage-text{
+            font-family: "Manrope-Medium", sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 150%;
+            color: #fff;
+            margin-right: 12px;
+        }
+
+        .project__stage-btn{
+            width: 21px;
+            height: 24px;
+            position: relative;
+            border: none;
+            cursor: pointer;
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &::before{
+                content: url('../../../public/images/dots.svg');
+            }
+        }
+
+        .project__task{
+            border: 1px solid #454554;
+            border-radius: 8px;
+            padding: 16px;
+            width: 202px;
+            background: #2e2e2e;
+            margin-bottom: 16px;
+            cursor: pointer;
+
+            &-img{
+                width: 170px;
+                height: 127px;
+                object-fit: cover;
+                margin-bottom: 16px;
+            }
+
+            &-deadline{
+                width: 120px;
+                height: 24px;
+                padding: 8px;
+                border-radius: 5px;
+                background-color: #06c698;
+                margin-bottom: 8px;
+                display: flex;
+                align-items: center;
+
+                &-text{
+                    font-family: "Manrope-Regular", sans-serif;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 133%;
+                    color: #fff;
+                    position: relative;
+                    padding-left: 20px;
+
+                    &::before{
+                        content: url('../../../public/images/deadline.svg');
+                        width: 12px;
+                        height: 12px;
+                        position: absolute;
+                        left: 0px;
+                        top: 2px;
+                    }
+                }
+            }
+
+            &-title{
+                font-family: "Manrope-Bold", sans-serif;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 144%;
+                color: #fff;
+                margin-bottom: 16px;
+            }
+
+            &-text{
+                font-family: "Manrope-Regular", sans-serif;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 133%;
+                color: #fff;
+                margin-bottom: 16px;
+                overflow: hidden;
+                max-height: 50px;
+            }
+
+            &-progress{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 16px;
+
+                &-text, .project__task-progress-count{
+                    font-family: "Manrope-Regular", sans-serif;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 133%;
+                    color: #fff;
+                }
+            }
+
+            &-footer{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .task__footer-stats{
+                    display: flex;
+
+                    .task__footer-stat{
+                        width: 21px;
+                        height: 13px;
+                        position: relative;
+                        margin-right: 8px;
+
+                        &::before{
+                            position: absolute;
+                            width: 12px;
+                            height: 12px;
+                            left: 0px;
+                            top: -3px;
+                        }
+                    }
+
+                    .task__footer-count{
+                        font-family: "Manrope-SemiBold", sans-serif;
+                        font-weight: 600;
+                        font-size: 10px;
+                        color: #fff;
+                        padding-left: 14px;
+                    }
+
+                    .task__footer-view::before{
+                        content: url('../../../public/images/footerView.svg')
+                    }
+
+                    .task__footer-comment::before{
+                        content: url('../../../public/images/footerComment.svg')
+                    }
+                }
+
+                .task__footer-images{
+                    .project__team-wrapper-img{
+                        width: 24px;
+                        height: 24px;
+                        margin-left: -10px;
+                        border: 1px solid #fff;
+                        cursor: pointer;
+                    }
+
+                    .project__team-images{
+                        margin-right: -10px;
+                    }
+                }
+            }
+        }
+
+        &-btn{
+            border: 1px solid #d2d2d2;
+            border-radius: 8px;
+            padding: 10px;
+            width: 202px;
+            height: 40px;
+            padding: 10px;
+            background-color: transparent;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            &-text{
+                font-family: "Manrope-Regular", sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 114%;
+                color: #d2d2d2;
+                padding-left: 24px;
+                position: relative;
+                
+
+                &::before{
+                    content: url('../../../public/images/plus.svg');
+                    width: 20px;
+                    height: 20px;
+                    left: 0;
+                    top: -2px;
+                    position: absolute;
+                }
+            }
+        }
+    }
+
+    &__tasks-wrapper{
+        display: flex;
+        margin-top: 10px;
+    }
+
+    &__btn{
+        border: 1px dashed #d2d2d2;
+        border-radius: 8px;
+        padding: 10px;
+        min-width: 202px;
+        height: 40px;
+        padding: 10px;
+        background-color: transparent;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-top: 10px;
+
+        &-text{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 114%;
+            color: #d2d2d2;
+            padding-left: 24px;
+            position: relative;
+            
+
+            &::before{
+                content: url('../../../public/images/plus.svg');
+                width: 20px;
+                height: 20px;
+                left: 0;
+                top: -2px;
+                position: absolute;
+            }
+        }
+    }
+}

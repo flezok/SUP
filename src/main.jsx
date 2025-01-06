@@ -9,6 +9,7 @@ import Home from './components/home/Home.jsx';
 import Account from './components/account/Account.jsx';
 import Boards from './components/boards/Boards.jsx';
 import Project from './components/project/project.jsx';
+import Employees from './components/emloyees/Employees.jsx';
 
 import './normalize.scss'
 import './global.scss'
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/account" element={<Account />} />
           <Route path="/boards" element={<Boards />} />
           <Route path="/project" element={<Project />} />
+          <Route path="/employees" element={<Employees />} />
         </Routes>
       </div>
     

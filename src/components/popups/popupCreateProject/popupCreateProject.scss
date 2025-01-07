@@ -1,0 +1,236 @@
+.popup{
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    position: fixed;
+    // margin-top: -18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::after{
+        content: '';
+        background-color: #262626;
+        opacity: 0.8;   
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        position: absolute;
+        z-index: 1;
+    }
+
+    &__title{
+        text-align: center;
+        font-family: "Manrope-Bold", sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 96%;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+
+    &__wrapper{
+        width: 50%;
+        height: 702px;
+        background-color: #2e2e2e;
+        border-radius: 16px;
+        z-index: 2;
+        padding: 16px 32px;
+    }
+
+    &__close-wrapper{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5px;
+        position: relative;
+
+        .popup__close-btn{
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            right: 0ch;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &::before{
+                content: url('../../../../public/images/popupClose.svg');
+                width: 28px;
+                height: 28px;
+            }
+        }
+    }
+
+    &__name-container{
+        display: flex;
+        // margin-left: 72px;
+        align-items: flex-end;
+        margin-bottom: 30px;
+    }
+
+    &__name-inner{
+        width: 670px;
+        margin-right: 98px;
+    }
+
+    &__name-title{
+        font-family: "Manrope-Bold", sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 150%;
+        color: #fff;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    &__name-input{
+        width: 100%;
+        border: 1px solid #454554;
+        border-radius: 15px;
+        padding: 16px;
+        height: 55px;
+        background: #131317;
+        font-family: "Manrope-Regular", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 144%;
+        color: #fff;
+
+        &::placeholder{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 144%;
+            color: rgba(255, 255, 255, 0.64);
+        }
+    }
+
+    &__img-wrapper{
+        width: 100px;
+        height: 100px;
+        // border: 1px solid #fff;
+        display: flex;
+        position: relative;
+    }
+
+    &__img-images{
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    &__img-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0; /* делает инпут полностью прозрачным */
+        cursor: pointer; /* сохраняет указатель в виде руки для клика */
+    }
+
+    &__description{
+        // margin-left: 72px;
+        margin-bottom: 30px;
+        width: 670px;
+
+        &-input{
+            height: 162px;
+            resize: none;
+        }
+    }
+
+    &__members{
+        display: flex;
+        margin-bottom: 36px;
+
+        &-btn{
+            border-radius: 15px;
+            width: 420px;
+            height: 45px;
+            margin-right: 41px;
+            position: relative;
+            background-color: transparent;
+            cursor: pointer;
+            border: 1px solid #d2d2d2;
+            text-align: left;
+            margin-right: 30px;
+        }
+
+        &-text{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 100%;
+            color: #fff;
+            padding-left: 48px;
+            
+
+            &::before{
+                content: url('../../../../public/images/projectMembers.svg');
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                left: 16px;
+            }
+        }
+
+        &-inner{
+            cursor: default;
+        }
+    }
+
+    &__deadline{
+        display: flex;
+        align-items: center;
+        margin-bottom: 36px;
+
+        &-text::before{
+            content: url('../../../../public/images/projectDate.svg');
+        }
+
+        &-date{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 80%;
+            color: #fff;
+        }
+    }
+
+    &__btns{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__btn{
+        width: 190px;
+        height: 45px;
+        background: #599ef1;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        margin-right: 20px;
+
+        &-text{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 67%;
+            color: #fff;
+            
+        }
+    }
+
+    &__btn-cancel{
+        background: transparent;
+        border: 1px solid #d2d2d2;
+    }
+}

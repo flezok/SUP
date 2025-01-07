@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import './header.scss'
 
-const Header = ({ onSearchPopupOpen }) => {
+const Header = ({ onSearchPopupOpen, onOpenCreateProject }) => {
 
 
     return (
@@ -26,7 +26,7 @@ const Header = ({ onSearchPopupOpen }) => {
                     </div>
 
                     <div className='header__container-wrapper'>
-                        <button className="header__btn">
+                        <button className="header__btn" onClick={onOpenCreateProject}>
                             <p className="header__btn-text">
                                 Создать проект
                             </p>

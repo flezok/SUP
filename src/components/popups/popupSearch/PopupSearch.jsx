@@ -1,12 +1,12 @@
 import {  } from 'react';
 
-import './PopupSearch.scss'
+import './popupSearch.scss'
 
 const PopupSearch = ({ onSearchPopupClose }) => {
 
 
     return (
-        <div className='popup'>
+        <div className='popup__search'>
             <div className='popup__wrapper'>
                 <div className="popup__header">
                     <h3 className="popup__header-title">

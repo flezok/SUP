@@ -11,12 +11,14 @@ import Boards from './components/boards/Boards.jsx';
 import Project from './components/project/project.jsx';
 import Employees from './components/emloyees/Employees.jsx';
 import PopupSearch from './components/popups/popupSearch/popupSearch.jsx';
+import PopupCreateProject from './components/popups/popupCreateProject/PopupCreateProject.jsx';
 
 import './normalize.scss'
 import './global.scss'
 
 const App = () => {
     const [isFocusedSearch, setIsFocusedSearch] = useState(false);
+    const [createProject, setCreateProject] = useState(false);
 
     const onSearchPopupOpen = () => {
       setIsFocusedSearch(true);
@@ -26,11 +28,19 @@ const App = () => {
       setIsFocusedSearch(false);
     };
 
+    const onOpenCreateProject = () => {
+        if (isFocusedSearch === true){
+            setIsFocusedSearch(false);
+        }
+        setCreateProject(!createProject);
+    };
+
     return (
         <StrictMode>
             <BrowserRouter>
                 {/* <Authorization/> */}
-                <Header onSearchPopupOpen={onSearchPopupOpen}/>
+                <Header onSearchPopupOpen={onSearchPopupOpen}
+                        onOpenCreateProject={onOpenCreateProject}/>
                 <div className="container">
                     <Menu />
                     <Routes>
@@ -40,7 +50,8 @@ const App = () => {
                         <Route path="/project" element={<Project />} />
                         <Route path="/employees" element={<Employees />} />
                     </Routes>
-                    ${isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose}/>}
+                    {isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose}/>}
+                    {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject}/>}
                 </div>
             </BrowserRouter>
         </StrictMode>

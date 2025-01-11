@@ -1,8 +1,18 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './home.scss'
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    const onProjectClick = () => {
+        navigate('/project');
+    };
+
+    const onBoardsClick = () => {
+        navigate('/boards');
+    };
 
     return (
         <section>
@@ -60,13 +70,13 @@ const Home = () => {
                     <h2 className="visit__header-title">
                         Последние проекты
                     </h2>
-                    <p className="visit__header-link">
+                    <p className="visit__header-link" onClick={onBoardsClick}>
                         Все доски
                     </p>
                 </div>
 
                 <div className="visit__items">
-                    <div className="visit__item">
+                    <div className="visit__item" onClick={onProjectClick}>
                         <img className='visit__item-img' src="../../../public/images/projectLast.jpg"></img>
                         <h3 className="visit__item-title">
                             Супер проект 2025
@@ -76,7 +86,7 @@ const Home = () => {
                         </p>
                     </div>
 
-                    <div className="visit__item">
+                    <div className="visit__item" onClick={onProjectClick}>
                         <img className='visit__item-img' src="../../../public/images/projectLast.jpg"></img>
                         <h3 className="visit__item-title">
                             Супер проект 2025
@@ -86,7 +96,7 @@ const Home = () => {
                         </p>
                     </div>
 
-                    <div className="visit__item">
+                    <div className="visit__item" onClick={onProjectClick}>
                         <img className='visit__item-img' src="../../../public/images/projectLast.jpg"></img>
                         <h3 className="visit__item-title">
                             Супер проект 2025

@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import './menu.scss'
 
 const Menu = () => {
     const [activeTab, setActiveTab] = useState("home");
+    const location = useLocation(); // Получаем текущий путь страницы
 
     const tabs = [
         { id: "home", label: "Главная", className: "menu__list-home", path: '/'},
@@ -25,7 +26,7 @@ const Menu = () => {
                             <Link   to={tab.path}
                                     key={tab.id}
                                     className={`menu__list-item ${tab.className} ${
-                                        activeTab === tab.id ? "menu__list-item--active" : ""
+                                        location.pathname === tab.path ? "menu__list-item--active" : ""
                                     }`}
                                     onClick={() => setActiveTab(tab.id)} // Обновляем активный таб
                             >

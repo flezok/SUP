@@ -12,6 +12,7 @@ import Project from './components/project/project.jsx';
 import Employees from './components/emloyees/Employees.jsx';
 import PopupSearch from './components/popups/popupSearch/popupSearch.jsx';
 import PopupCreateProject from './components/popups/popupCreateProject/PopupCreateProject.jsx';
+import PopupEmployee from './components/popups/popupEmployee/PopupEmployee.jsx';
 
 import './normalize.scss'
 import './global.scss'
@@ -19,6 +20,7 @@ import './global.scss'
 const App = () => {
     const [isFocusedSearch, setIsFocusedSearch] = useState(false);
     const [createProject, setCreateProject] = useState(false);
+    const [employeePopup, setEmployeePopup] = useState(false);
 
     const onSearchPopupOpen = () => {
       setIsFocusedSearch(true);
@@ -35,6 +37,15 @@ const App = () => {
         setCreateProject(!createProject);
     };
 
+    const onEmployeePopup = () => {
+        if (isFocusedSearch === true){
+            setIsFocusedSearch(false);
+        }
+        setEmployeePopup(!employeePopup);
+    };
+
+    
+
     return (
         <StrictMode>
             <BrowserRouter>
@@ -48,10 +59,11 @@ const App = () => {
                         <Route path="/account" element={<Account />} />
                         <Route path="/boards" element={<Boards />} />
                         <Route path="/project" element={<Project />} />
-                        <Route path="/employees" element={<Employees />} />
+                        <Route path="/employees" element={<Employees onEmployeePopup={onEmployeePopup}/>} />
                     </Routes>
                     {isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose}/>}
                     {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject}/>}
+                    {employeePopup && <PopupEmployee onEmployeePopup={onEmployeePopup}/>}
                 </div>
             </BrowserRouter>
         </StrictMode>

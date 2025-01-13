@@ -21,6 +21,10 @@ const App = () => {
     const [isFocusedSearch, setIsFocusedSearch] = useState(false);
     const [createProject, setCreateProject] = useState(false);
     const [employeePopup, setEmployeePopup] = useState(false);
+    const [openAddMember, setOpenAddMember] = useState(false);
+    const [openConfirm, setOpenConfirm] = useState(false);
+    const [confirmTitle, setConfirmTitle] = useState('фыв');
+    const [openSettingsProject, setOpenSettingsProject] = useState(false);
 
     const onSearchPopupOpen = () => {
       setIsFocusedSearch(true);
@@ -44,6 +48,18 @@ const App = () => {
         setEmployeePopup(!employeePopup);
     };
 
+    const onOpenAddMember = () => {
+        setOpenAddMember(!openAddMember)
+    }
+
+    const onOpenConfirm = (title) => {
+        setConfirmTitle(title);
+        setOpenConfirm(!openConfirm)
+    }
+
+    const onOpenSettingsProject = () => {
+        setOpenSettingsProject(!openSettingsProject)
+    }
     
 
     return (
@@ -58,11 +74,18 @@ const App = () => {
                         <Route path="/" element={<Home />} />
                         <Route path="/account" element={<Account />} />
                         <Route path="/boards" element={<Boards />} />
-                        <Route path="/project" element={<Project />} />
+                        <Route path="/project" 
+                               element={<Project onOpenAddMember={onOpenAddMember} 
+                                                 openAddMember={openAddMember}
+                                                 onOpenConfirm={onOpenConfirm} 
+                                                 openConfirm={openConfirm} 
+                                                 onOpenSettingsProject={onOpenSettingsProject}
+                                                 openSettingsProject={openSettingsProject} 
+                                                 confirmTitle={confirmTitle}/>} />
                         <Route path="/employees" element={<Employees onEmployeePopup={onEmployeePopup}/>} />
                     </Routes>
                     {isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose}/>}
-                    {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject}/>}
+                    {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember}/>}
                     {employeePopup && <PopupEmployee onEmployeePopup={onEmployeePopup}/>}
                 </div>
             </BrowserRouter>

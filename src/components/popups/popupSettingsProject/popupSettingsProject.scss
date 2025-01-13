@@ -1,0 +1,30 @@
+.popup__wrapper.popup__settingsProject{
+    height: 715px;
+
+    .popup__deadline{
+        margin-bottom: 24px;
+    }
+
+    .popup__settingsProject-btn{
+        margin-bottom: 24px;
+    }
+
+    .settingsProject__btn-finish .popup__members-text{
+        &::before{
+            content: url('../../../../public/images/finish.svg')
+        }
+    }
+
+    .settingsProject__btn-delete{
+        border-color: #d00101;
+        // background-color: #851616;
+
+        .popup__members-text{
+            color: #d00101;
+
+            &::before{
+                content: url('../../../../public/images/delete.svg');
+            }
+        }
+    }
+}

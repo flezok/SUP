@@ -1,14 +1,19 @@
 import { useState } from 'react';
 
+import PopupAddMemberProject from '../popups/popupAddMemberProject/PopupAddMemberProject';
+import PopupSettingsProject from '../popups/popupSettingsProject/PopupSettingsProject';
+
 import './project.scss'
 
-const Project = () => {
+const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, onOpenSettingsProject, openSettingsProject, confirmTitle}) => {
 
     return (
         <section className='project'>
             <h2 className='account__title'>
                 Доска проекта
             </h2>
+
+            
 
             <div className='project__header'>
                 <div className="project__name project__header-item">
@@ -36,7 +41,7 @@ const Project = () => {
                         </div>
                     </div>
 
-                    <button className='project__team-btn'>
+                    <button className='project__team-btn' onClick={onOpenAddMember}>
                         <p className='project__team-btn-text'>
                             Добавить участника
                         </p>
@@ -44,7 +49,7 @@ const Project = () => {
                 </div>
                 
                 <div className="project__setting project__header-item">
-                    <button className="project__setting-btn">
+                    <button className="project__setting-btn" onClick={onOpenSettingsProject}>
                         <p className="project__setting-text">
                             Настройки
                         </p>
@@ -375,6 +380,9 @@ const Project = () => {
                 </button>
                 </div>
             </div>
+
+            {openAddMember && <PopupAddMemberProject onOpenAddMember={onOpenAddMember}/>}
+            {openSettingsProject && <PopupSettingsProject onOpenConfirm={onOpenConfirm} openConfirm={openConfirm} onOpenSettingsProject={onOpenSettingsProject} confirmTitle={confirmTitle}/>}
         </section>
     )
 

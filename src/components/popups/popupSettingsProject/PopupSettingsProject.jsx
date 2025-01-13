@@ -3,17 +3,19 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import PopupAddMemberProject from '../popupAddMemberProject/PopupAddMemberProject';
+import PopupConfirm from '../popupConfirm/PopupConfirm';
 
-import './popupCreateProject.scss'
+import './popupSettingsProject.scss'
 
-const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMember }) => {
-
+const PopupSettingsProject = ({ onOpenSettingsProject, onOpenConfirm, openConfirm, confirmTitle }) => {
+            
     const [projectAvatar, setProjectAvatar] = useState('/images/downloadPhoto2.svg');
     
 
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
+
+    
     
     // Функция для выбора фото
     const handleImageChange = (event) => {
@@ -27,19 +29,14 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
         }
     };
 
-    
-        
-
     return (
         <div className='popup'>
-            <div className='popup__wrapper'>
-                
-
-                <div className="popup__close-wrapper">
+            <div className='popup__wrapper popup__settingsProject'>
+            <div className="popup__close-wrapper">
                     <h3 className="popup__title">
-                        Создание проекта
+                        Настройки проекта
                     </h3>
-                    <button className='popup__close-btn' onClick={onOpenCreateProject}>
+                    <button className='popup__close-btn' onClick={onOpenSettingsProject}>
 
                     </button>
                 </div>
@@ -49,7 +46,7 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                         <label className="popup__name-title" htmlFor='projectName'>
                             Название
                         </label>
-                        <input className="popup__name-input" id="projectName" type='text' placeholder='Напишите название...'></input>
+                        <input className="popup__name-input" id="projectName" type='text' placeholder='Напишите название...' defaultValue={'старой название'}></input>
                     </div>
 
                     <div className="popup__img-wrapper">
@@ -62,35 +59,7 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                     <label className="popup__name-title popup__description-title" htmlFor='projectDescription'>
                         Описание
                     </label>
-                    <textarea className="popup__name-input popup__description-input" id="projectDescription" type='text' placeholder='Напишите описание...'></textarea>
-                </div>
-
-                <div className="popup__members">
-                    <button className="popup__members-btn" onClick={onOpenAddMember}>
-                        <p className="popup__members-text">
-                            Добавить участников
-                        </p>
-                    </button>
-
-                    
-
-                    <div className="project__team-images popup__members-images">
-                        <div className="project__team-wrapper-img popup__members-inner">
-                            <img className="project__team-img popup__members-img" src="../../../public/images/avatar1.png">
-
-                            </img>
-                        </div>
-                        <div className="project__team-wrapper-img popup__members-inner">
-                            <img className="project__team-img popup__members-img" src="../../../public/images/avatar2.png">
-
-                            </img>
-                        </div>
-                        <div className="project__team-wrapper-img popup__members-inner">
-                            <img className="project__team-img popup__members-img" src="../../../public/images/avatar3.png">
-
-                            </img>
-                        </div>
-                    </div>
+                    <textarea className="popup__name-input popup__description-input" id="projectDescription" type='text' placeholder='Напишите описание...' defaultValue={'Старое описание бла бла бла'}></textarea>
                 </div>
 
                 <div className='popup__deadline'>
@@ -111,25 +80,41 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                     />
                 </div>
 
+                <div className="popup__settingsProject-btn">
+                    <button className="popup__members-btn settingsProject__btn-finish" onClick={() => onOpenConfirm("завершить")}>
+                            <p className="popup__members-text">
+                                Завершить проект
+                            </p>
+                    </button>
+                </div>
+
+                <div className="popup__settingsProject-btn">
+                    <button className="popup__members-btn settingsProject__btn-delete" onClick={() => onOpenConfirm("удалить")}>
+                            <p className="popup__members-text">
+                                Удалить проект
+                            </p>
+                    </button>
+                </div>
+
                 <div className="popup__btns">
                     <button className="popup__btn popup__btn-add">
                         <p className="popup__btn-text">
                             Создать
                         </p>
                     </button>
-                    <button className="popup__btn popup__btn-cancel" onClick={onOpenCreateProject}>
+                    <button className="popup__btn popup__btn-cancel" onClick={onOpenSettingsProject}>
                         <p className="popup__btn-text">
                             Отменить
                         </p>
                     </button>
                 </div>
 
-                {openAddMember && <PopupAddMemberProject onOpenAddMember={onOpenAddMember}/>}
-                
             </div>
+
+            {openConfirm && <PopupConfirm onOpenConfirm={onOpenConfirm} confirmTitle={confirmTitle}/>}
         </div>
     )
 
 }
 
-export default PopupCreateProject
+export default PopupSettingsProject

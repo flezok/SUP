@@ -1,0 +1,132 @@
+.popup__add{
+    &-wrapper{
+        display: flex;
+        width: 100%;
+        position: relative;
+        justify-content: center;
+        .popup__add-close{
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            right: 0ch;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &::before{
+                content: '+';
+                font-family: "Manrope-Bold", sans-serif;
+                font-size: 28px;
+                transform: rotate(45deg);
+                color: #fff;
+            }
+        }
+    }
+
+    &-title{
+        font-family: "Manrope-Bold", sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 150%;
+        color: #fff;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    &-input{
+        width: 100%;
+        border: 1px solid #454554;
+        border-radius: 8px;
+        padding: 16px;
+        height: 23px;
+        background: #131317;
+        font-family: "Manrope-Regular", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 144%;
+        color: #fff;
+        margin-bottom: 10px;
+
+        &::placeholder{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 144%;
+            color: rgba(255, 255, 255, 0.64);
+        }
+    }
+
+    &-items{
+        width: 100%;
+        max-height: 304px;
+        overflow-y: auto;
+        scrollbar-width: thin; /* Для Firefox */
+        scrollbar-color: #888 #333; /* Цвет полосы и фона для Firefox */
+    }
+
+    /* Webkit (Chrome, Edge, Opera) */
+    &-items::-webkit-scrollbar {
+        width: 8px; /* Узкая ширина скролла */
+    }
+
+    &-items::-webkit-scrollbar-thumb {
+        background: #888; /* Цвет самого скроллбара */
+        border-radius: 8px; /* Скругленные края */
+        border: 2px solid #333; /* Граница вокруг скролла */
+    }
+
+    &-items::-webkit-scrollbar-thumb:hover {
+        background: #fff; /* Изменение цвета при наведении */
+    }
+
+    &-items::-webkit-scrollbar-track {
+        background: #333; /* Темный фон трека */
+        border-radius: 10px;
+    }
+
+    &-item{
+        display: flex;
+        height: 52px;
+        justify-content: space-between;
+        cursor: pointer;
+    
+        .popup__add-item-wrapper{
+            display: flex;
+            padding: 10px 0;
+            align-items: center;
+        }
+
+        &-img{
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        &-name{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 80%;
+            color: #fff;
+        }
+
+        &-check{
+            width: 32px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &::before{
+                content: url('../../../../public/images/check.svg');
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+}

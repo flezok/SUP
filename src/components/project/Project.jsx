@@ -2,10 +2,29 @@ import { useState } from 'react';
 
 import PopupAddMemberProject from '../popups/popupAddMemberProject/PopupAddMemberProject';
 import PopupSettingsProject from '../popups/popupSettingsProject/PopupSettingsProject';
+import PopupProjectMembers from '../popups/popupProjectMembers/PopupProjectMembers';
+import PopupAddStage from '../popups/popupAddStage/PopupAddStage';
+import PopupSettingsStage from '../popups/popupSettingsStage/PopupSettingsStage';
 
 import './project.scss'
 
-const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, onOpenSettingsProject, openSettingsProject, confirmTitle}) => {
+const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, onOpenSettingsProject, openSettingsProject, confirmTitle, openProjectMembers, onOpenProjectMembers, onEmployeePopup}) => {
+
+    const [createStage, setCreateStage] = useState(false);
+    const [optionsStage, setOptionsStage] = useState(false);
+    const [settingsStage, setSettingsStage] = useState(false);
+
+    const onOpenCreateStage = () => {
+        setCreateStage(!createStage)
+    }
+
+    const onOpenOptionsStage = () => {
+        setOptionsStage(!optionsStage)
+    }
+
+    const onOpenSettingsStage = () => {
+        setSettingsStage(!settingsStage)
+    }
 
     return (
         <section className='project'>
@@ -79,22 +98,23 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
             <div className="project__tools">
                 <div className="project__inner">
                     <div className="project__tools-search">
-                        <input className="project__tools-input" type="text" placeholder='Поиск'></input>
+                        <input className="project__tools-input" type="text" placeholder='Поиск задачи'></input>
                     </div>
-                    <div className="project__tools-sort">
-                        <button className="project__sort-btn">
+
+                    {/* <div className="project__tools-sort"> */}
+                        {/* <button className="project__sort-btn">
                             <p className="project__sort-btn-text">
                                 Стандартная
                             </p>
-                        </button>
+                        </button> */}
                         {/* <ul class="dropdown__menu">
                             <li class="dropdown__item"><a href="#">Пункт 1</a></li>
                             <li class="dropdown__item"><a href="#">Пункт 2</a></li>
                             <li class="dropdown__item"><a href="#">Пункт 3</a></li>
                         </ul> */}
-                    </div>
+                    {/* </div> */}
                 </div>
-                <button className='project__member'>
+                <button className='project__member' onClick={onOpenProjectMembers}>
                     <p className='project__member-text'>
                         Сотрудники
                     </p>
@@ -105,7 +125,7 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
                 <div className="project__container-wrapper">
                 <div className="project__tasks-wrapper">
 
-                    <div className='project__tasks'>
+                <div className='project__tasks'>
                         <div className="project__tasks-stage">
                             <div className='project__stage-wrapper'>
                                 <div className='project__stage-color'></div>
@@ -113,139 +133,20 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
                                     В ожидании
                                 </p>
                             </div>
-                            <button className='project__stage-btn'></button>
-                        </div>
+                            <button className='project__stage-btn' onClick={onOpenOptionsStage}></button>
 
-                        <div className="project__task">
-                            <img className="project__task-img" src="../../../public/images/task.png"></img>
-                            <div className="project__task-deadline">
-                                <p className="project__task-deadline-text">
-                                    06 фев 2025
-                                </p>
-                            </div>
-                            <h3 className='project__task-title'>
-                                Название крутой задачи
-                            </h3>
-                            <p className="project__task-text">
-                                Эта крутая задача с очень длинным описанием тут я что-то написал про эту задачу она реально суперская
-                            </p>
-                            <div className="project__task-progress">
-                                <p className="project__task-progress-text">
-                                    Прогресс:
-                                </p>
-                                <p className="project__task-progress-count">
-                                    0/6
-                                </p>
-                            </div>
-                            <div className='project__task-footer'>
-                                <div className="task__footer-stats">
-                                    <div className="task__footer-stat task__footer-view">
-                                        <p className="task__footer-count">
-                                            4
-                                        </p>
-                                    </div>
-                                    <div className="task__footer-stat task__footer-comment">
-                                        <p className="task__footer-count">
-                                            15        
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className='task__footer-images'>
-                                    <div className="project__team-images">
-                                        <div className="project__team-wrapper-img">
-                                            <img className="project__team-img" src="../../../public/images/avatar1.png">
-
-                                            </img>
-                                        </div>
-                                        <div className="project__team-wrapper-img">
-                                            <img className="project__team-img" src="../../../public/images/avatar2.png">
-
-                                            </img>
-                                        </div>
-                                        <div className="project__team-wrapper-img">
-                                            <img className="project__team-img" src="../../../public/images/avatar3.png">
-
-                                            </img>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="project__task">
-                            <img className="project__task-img" src="../../../public/images/task.png"></img>
-                            <div className="project__task-deadline">
-                                <p className="project__task-deadline-text">
-                                    06 фев 2025
-                                </p>
-                            </div>
-                            <h3 className='project__task-title'>
-                                Название крутой задачи
-                            </h3>
-                            <p className="project__task-text">
-                                Эта крутая задача с очень длинным описанием тут я что-то написал про эту задачу она реально суперская
-                            </p>
-                            <div className="project__task-progress">
-                                <p className="project__task-progress-text">
-                                    Прогресс:
-                                </p>
-                                <p className="project__task-progress-count">
-                                    0/6
-                                </p>
-                            </div>
-                            <div className='project__task-footer'>
-                                <div className="task__footer-stats">
-                                    <div className="task__footer-stat task__footer-view">
-                                        <p className="task__footer-count">
-                                            4
-                                        </p>
-                                    </div>
-                                    <div className="task__footer-stat task__footer-comment">
-                                        <p className="task__footer-count">
-                                            15        
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className='task__footer-images'>
-                                    <div className="project__team-images">
-                                        <div className="project__team-wrapper-img">
-                                            <img className="project__team-img" src="../../../public/images/avatar1.png">
-
-                                            </img>
-                                        </div>
-                                        <div className="project__team-wrapper-img">
-                                            <img className="project__team-img" src="../../../public/images/avatar2.png">
-
-                                            </img>
-                                        </div>
-                                        <div className="project__team-wrapper-img">
-                                            <img className="project__team-img" src="../../../public/images/avatar3.png">
-
-                                            </img>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button className="project__tasks-btn">
-                            <p className='project__tasks-btn-text'>
-                                Новая задача
-                            </p>
-                        </button>
-                    </div>
-
-                    <div className='project__tasks'>
-                        <div className="project__tasks-stage">
-                            <div className='project__stage-wrapper'>
-                                <div className='project__stage-color'></div>
-                                <p className='project__stage-text'>
-                                    В ожидании
-                                </p>
-                            </div>
-                            <button className='project__stage-btn'></button>
+                            {optionsStage && <ul className="project__stage-list">
+                                <li className='project__stage-item' onClick={onOpenSettingsStage}>
+                                    <p className="project__stage-item-text">
+                                        Редактировать
+                                    </p>
+                                </li>
+                                <li className='project__stage-item'>
+                                    <p className="project__stage-item-text">
+                                        Удалить
+                                    </p>
+                                </li>
+                            </ul>}
                         </div>
 
                         <div className="project__task">
@@ -371,9 +272,11 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
 
                     
 
+                    
+
                 </div>
 
-                <button className="project__btn">
+                <button className="project__btn" onClick={onOpenCreateStage}>
                     <p className='project__btn-text'>
                         Новый этап
                     </p>
@@ -382,7 +285,15 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
             </div>
 
             {openAddMember && <PopupAddMemberProject onOpenAddMember={onOpenAddMember}/>}
-            {openSettingsProject && <PopupSettingsProject onOpenConfirm={onOpenConfirm} openConfirm={openConfirm} onOpenSettingsProject={onOpenSettingsProject} confirmTitle={confirmTitle}/>}
+            {openSettingsProject && <PopupSettingsProject onOpenConfirm={onOpenConfirm} 
+                                                          openConfirm={openConfirm} 
+                                                          onOpenSettingsProject={onOpenSettingsProject} 
+                                                          confirmTitle={confirmTitle}/>}
+            {openProjectMembers && <PopupProjectMembers onOpenProjectMembers={onOpenProjectMembers} onEmployeePopup={onEmployeePopup}/>}
+            {createStage && <PopupAddStage onOpenCreateStage={onOpenCreateStage}/>}
+            {settingsStage && <PopupSettingsStage onOpenSettingsStage={onOpenSettingsStage}/>}
+            
+
         </section>
     )
 

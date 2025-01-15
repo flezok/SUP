@@ -1,0 +1,36 @@
+.popup__items-members{
+    max-height: 625px;
+
+    .popup__add-item-img{
+        width: 48px;
+        height: 48px;
+        margin-right: 15px;
+    }
+
+    .popup__add-item-name{
+        // margin-right: 127px;
+        font-size: 18px;
+    }
+
+    .popup__members-pos{
+        opacity: 0.6;
+    }
+
+    .popup__add-item{
+        border-bottom: 1px solid #454554;
+        height: 72px;
+        padding: 16px;
+
+        &:nth-last-child(1){
+            border-bottom: 1px solid transparent;
+        }
+    }
+}
+
+.popup__wrapper.popup__project-members{
+    padding: 16px 0px;
+
+    .popup__close-btn{
+        right: 16px;
+    }
+}

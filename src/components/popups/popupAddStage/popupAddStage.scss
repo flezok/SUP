@@ -1,0 +1,22 @@
+.popup__color{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    // border: 1px solid #fff;
+    cursor: pointer;
+   
+
+    &-wrapper{
+        position: absolute;
+        bottom: -210px;
+        left: -50px;
+    }
+}
+
+.popup__collor-container{
+    position: relative;
+}
+
+.popup__wrapper.popup__add-stage{
+    height: 270px;
+}

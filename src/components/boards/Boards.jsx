@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 import './boards.scss'
 
-const Boards = () => {
+const Boards = ({}) => {
 
     const [isFollowed, setIsFollowed] = useState(false); // Состояние кнопки
     const navigate = useNavigate();
-
+    
     const handleBoardClick = () => {
         navigate('/project');
     };
+    
 
     const handleButtonClick = () => {
         setIsFollowed((prevState) => !prevState); // Переключаем состояние

@@ -2,6 +2,7 @@ import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+
 // import Authorization from './components/authorization/authorization';
 import Header from './components/header/Header.jsx';
 import Menu from './components/menu/menu.jsx';
@@ -23,8 +24,10 @@ const App = () => {
     const [employeePopup, setEmployeePopup] = useState(false);
     const [openAddMember, setOpenAddMember] = useState(false);
     const [openConfirm, setOpenConfirm] = useState(false);
-    const [confirmTitle, setConfirmTitle] = useState('фыв');
+    const [openProjectMembers, setOpenProjectMembers] = useState(false);
+    const [confirmTitle, setConfirmTitle] = useState('');
     const [openSettingsProject, setOpenSettingsProject] = useState(false);
+    
 
     const onSearchPopupOpen = () => {
       setIsFocusedSearch(true);
@@ -60,6 +63,12 @@ const App = () => {
     const onOpenSettingsProject = () => {
         setOpenSettingsProject(!openSettingsProject)
     }
+
+    const onOpenProjectMembers = () => {
+        setOpenProjectMembers(!openProjectMembers)
+    }
+
+    
     
 
     return (
@@ -81,7 +90,10 @@ const App = () => {
                                                  openConfirm={openConfirm} 
                                                  onOpenSettingsProject={onOpenSettingsProject}
                                                  openSettingsProject={openSettingsProject} 
-                                                 confirmTitle={confirmTitle}/>} />
+                                                 confirmTitle={confirmTitle}
+                                                 onOpenProjectMembers={onOpenProjectMembers}
+                                                 openProjectMembers={openProjectMembers}
+                                                 onEmployeePopup={onEmployeePopup}/>} />
                         <Route path="/employees" element={<Employees onEmployeePopup={onEmployeePopup}/>} />
                     </Routes>
                     {isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose}/>}

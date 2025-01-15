@@ -186,7 +186,7 @@
             position: absolute;
             left: 20px;
             top: 10px;
-            // z-index: 111;
+            z-index: 1;
         }
     }
 
@@ -321,6 +321,34 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
+            position: relative;
+
+            .project__stage-list{
+                position: absolute;
+                right: 0px;
+                bottom: -84px;
+                width: 125px;
+                background-color: #3d3d3d;
+
+                .project__stage-item{
+                    cursor: pointer;
+                    padding: 10px;
+                    border-bottom: 1px solid #fff;
+                    &:nth-last-child(1){
+                        border-bottom: 1px solid transparent;
+                    }
+
+
+                    &-text{
+                        font-family: "Manrope-Regular", sans-serif;
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 144%;
+                        color: #fff;
+                        margin-bottom: 0px;
+                    }
+                }
+            }
         }
 
         .project__stage-wrapper{

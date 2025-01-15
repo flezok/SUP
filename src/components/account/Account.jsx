@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import axios from "axios";
+import { useNavigate, useRouteLoaderData } from "react-router-dom";
 
 import './account.scss'
 
 const Account = () => {
+    const navigate = useNavigate();
+    const data = useRouteLoaderData("root");
+    console.log(data);
 
-    const [avatar, setAvatar] = useState('/images/avatarHeader.png');
+    const [avatar, setAvatar] = useState(data.avatarBase64);
 
     // Функция для выбора фото
     const handleImageChange = (event) => {
@@ -13,6 +18,11 @@ const Account = () => {
             const reader = new FileReader();
             reader.onload = (e) => {
                 setAvatar(e.target.result); // Устанавливаем новое изображение
+                axios.post("http://localhost:3000/user/changeAvatar", { avatar: e.target.result }, { withCredentials: true }).then((res) => {
+                    if (res.data.success) {
+                        console.log("Аватарка поменялось");
+                    };
+                });
             };
             reader.readAsDataURL(file); // Преобразуем файл в Data URL
         }
@@ -21,6 +31,15 @@ const Account = () => {
     // Клик по button открывает выбор файла
     const handleButtonClick = () => {
         document.getElementById('fileInput').click();
+    };
+
+    const handleLogout = () => {
+        axios.get("http://localhost:3000/user/logout", { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                navigate("/auth");
+            };
+        });
+        
     };
 
     return (
@@ -50,11 +69,15 @@ const Account = () => {
                             <button className="user__avatar-btn" onClick={handleButtonClick}></button>
                         </div>
                         <p className="user__name">
-                            Дмитрий Травин
+                            {data.firstName}
                         </p>
                         <p className="user__email">
-                            flezokt@gmail.com
+                            {data.email}
                         </p>
+
+                        <button  className="account__exit" onClick={handleLogout}>
+                            <p className="account__exit-text">Выйти из аккаунта</p>
+                        </button>
                     </div>
 
                     <div className="account__settings">
@@ -65,36 +88,36 @@ const Account = () => {
                         <div className='settings__inner-wrapper'>
                             <div className='settings__inner'>
                                 <label className='settings__label' htmlFor="FName">Имя</label>
-                                <input className='settings__input' id="FName" type="text" placeholder='Дмитрий' readOnly></input>
+                                <input className='settings__input' id="FName" type="text" placeholder={data.firstName} readOnly></input>
                             </div>
 
                             <div className='settings__inner'>
                                 <label className='settings__label' htmlFor="LName">Фамилия</label>
-                                <input className='settings__input' id="LName" type="text" placeholder='Травин' readOnly></input>
+                                <input className='settings__input' id="LName" type="text" placeholder={data.lastName} readOnly></input>
                             </div>
                         </div>
 
                         <div className='settings__inner-wrapper'>
                             <div className='settings__inner'>
                                 <label className='settings__label' htmlFor="PName">Отчество</label>
-                                <input className='settings__input' id="pName" type="text" placeholder='Андреевич' readOnly></input>
+                                <input className='settings__input' id="pName" type="text" placeholder={data.middleName} readOnly></input>
                             </div>
 
                             <div className='settings__inner'>
                                 <label className='settings__label' htmlFor="position">Должность</label>
-                                <input className='settings__input' id="position" type="text" placeholder='Senior-Frontend' readOnly></input>
+                                <input className='settings__input' id="position" type="text" placeholder={data.position ? data.position : 'Не назначено'} readOnly></input>
                             </div>
                         </div>
 
                         <div className='settings__inner-wrapper'>
                             <div className='settings__inner'>
                                 <label className='settings__label' htmlFor="settingsMail">E-mail</label>
-                                <input className='settings__input' id="settingsMail" type="email" placeholder='flezokt@gmail.com' readOnly></input>
+                                <input className='settings__input' id="settingsMail" type="email" placeholder={data.email} readOnly></input>
                             </div>
 
                             <div className='settings__inner'>
                                 <label className='settings__label' htmlFor="phoneNumber">Номер телефона</label>
-                                <input className='settings__input' id="phoneNumber" type="tel" placeholder='+79879660084' readOnly></input>
+                                <input className='settings__input' id="phoneNumber" type="tel" placeholder={data.number} readOnly></input>
                             </div>
                         </div>
 

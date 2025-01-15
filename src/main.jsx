@@ -1,9 +1,10 @@
 import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import axios from 'axios';
 
 
-// import Authorization from './components/authorization/authorization';
+import Authorization from './components/authorization/Authorization';
 import Header from './components/header/Header.jsx';
 import Menu from './components/menu/menu.jsx';
 import Home from './components/home/Home.jsx';
@@ -14,6 +15,7 @@ import Employees from './components/emloyees/Employees.jsx';
 import PopupSearch from './components/popups/popupSearch/popupSearch.jsx';
 import PopupCreateProject from './components/popups/popupCreateProject/PopupCreateProject.jsx';
 import PopupEmployee from './components/popups/popupEmployee/PopupEmployee.jsx';
+import Registration from './components/registration/registration.jsx';
 
 import './normalize.scss'
 import './global.scss'
@@ -68,18 +70,81 @@ const App = () => {
         setOpenProjectMembers(!openProjectMembers)
     }
 
-    
+    const router = createBrowserRouter([
+        {
+            path: "/auth",
+            element: <Authorization />,
+            index: true
+        },
+        {
+            path: "/registration",
+            element: <Registration />
+        },
+        {
+            path: "/",
+            id: "root",
+            loader: async () => {
+                const { data } = await axios.get("http://localhost:3000/user/check", { withCredentials: true });
+
+                return data;
+            },
+            element: (
+                <>
+                    <Header onSearchPopupOpen={onSearchPopupOpen}
+                            onOpenCreateProject={onOpenCreateProject}/>
+                    <div className="container">
+                        <Menu />
+                        {<Outlet />} 
+                    </div>
+                </>
+            ),
+            errorElement: (<h1>Войдите в систему</h1>),
+            children: [
+                {
+                    path: "/",
+                    element: <Home />
+                },
+                {
+                    path: "/account",
+                    element: <Account />
+                },
+                {
+                    path: "/boards",
+                    element: <Boards />
+                },
+                {
+                    path: "/project",
+                    element: <Project onOpenAddMember={onOpenAddMember} 
+                    openAddMember={openAddMember}
+                    onOpenConfirm={onOpenConfirm} 
+                    openConfirm={openConfirm} 
+                    onOpenSettingsProject={onOpenSettingsProject}
+                    openSettingsProject={openSettingsProject} 
+                    confirmTitle={confirmTitle}
+                    onOpenProjectMembers={onOpenProjectMembers}
+                    openProjectMembers={openProjectMembers}
+                    onEmployeePopup={onEmployeePopup}/>
+                },
+                {
+                    path: "employees",
+                    element: <Employees onEmployeePopup={onEmployeePopup} />
+                }
+            ]
+        }
+    ])
     
 
     return (
         <StrictMode>
-            <BrowserRouter>
-                {/* <Authorization/> */}
+            <RouterProvider router={router} />
+            {/* <BrowserRouter>
+                <Authorization/>
                 <Header onSearchPopupOpen={onSearchPopupOpen}
                         onOpenCreateProject={onOpenCreateProject}/>
                 <div className="container">
                     <Menu />
                     <Routes>
+                        <Route path="/registration" element={<Registration />} />
                         <Route path="/" element={<Home />} />
                         <Route path="/account" element={<Account />} />
                         <Route path="/boards" element={<Boards />} />
@@ -95,12 +160,12 @@ const App = () => {
                                                  openProjectMembers={openProjectMembers}
                                                  onEmployeePopup={onEmployeePopup}/>} />
                         <Route path="/employees" element={<Employees onEmployeePopup={onEmployeePopup}/>} />
-                    </Routes>
+                    </Routes> */}
                     {isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose}/>}
                     {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember}/>}
                     {employeePopup && <PopupEmployee onEmployeePopup={onEmployeePopup}/>}
-                </div>
-            </BrowserRouter>
+                {/* </div>
+            </BrowserRouter> */}
         </StrictMode>
     );
 };

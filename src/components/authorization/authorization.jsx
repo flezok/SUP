@@ -1,15 +1,28 @@
 import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import './authorization.scss'
 
 const Authorization = () => {
+    const navigate = useNavigate();
 
-    const [password, setPassword] = useState("");
+    // const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [formData, setForm] = useState({ email: "", password: "" });
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
-      };
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:3000/user/login", formData, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                navigate("/");
+            };
+        });
+    };
 
     return (
         <div className='authorization'>
@@ -18,7 +31,11 @@ const Authorization = () => {
                 <form>
                     <div className='form__inner'>
                         <label className='form__label' htmlFor="email">Почта</label>
-                        <input className='form__input' id="email" type="email" placeholder='Введите почту'></input>
+                        <input className='form__input'
+                               id="email" 
+                               type="email" 
+                               placeholder='Введите почту'
+                               onChange={(e) => setForm({ ...formData, email: e.target.value })}></input>
                     </div>
                     <div className='form__inner'>
                         <label className='form__label' htmlFor="pass">Пароль</label>
@@ -26,12 +43,12 @@ const Authorization = () => {
                                id="pass" 
                                type={showPassword ? "text" : "password"}
                                placeholder='Введите пароль'
-                               onChange={(e) => setPassword(e.target.value)}></input>
+                               onChange={(e) => setForm({ ...formData, password: e.target.value })}></input>
                         <button className='form__showPass' type='button' onClick={togglePasswordVisibility}>
                         
                         </button>
                     </div>
-                    <button className="form__btn">
+                    <button className="form__btn" onClick={handleSubmit}>
                         Войти
                     </button>
                 </form>

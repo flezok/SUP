@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useRouteLoaderData } from "react-router-dom";
 
 import './header.scss'
 
 const Header = ({ onSearchPopupOpen, onOpenCreateProject }) => {
 
+    const data = useRouteLoaderData("root");
 
     return (
         <>
@@ -31,7 +33,7 @@ const Header = ({ onSearchPopupOpen, onOpenCreateProject }) => {
                                 Создать проект
                             </p>
                         </button>
-                        <img className="header__avatar" alt="фото сотрудника" src="../../public/images/avatarHeader.png"></img>
+                        <img className="header__avatar" alt="фото сотрудника" src={`${data.avatarBase64}`}></img>
                     </div>
                 </div>
             </header>

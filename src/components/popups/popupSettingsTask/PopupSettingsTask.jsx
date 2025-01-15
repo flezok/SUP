@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import DatePicker from "react-datepicker";
 
+import PopupAddCheck from './popupAddCheck/PopupAddCheck';
+
 import './popupSettingsTask.scss'
 
 const PopupSettingsTask = ({ onOpenSettingsTask }) => {
@@ -9,6 +11,7 @@ const PopupSettingsTask = ({ onOpenSettingsTask }) => {
     const [startDate, endDate] = dateRange;
     const [activeItem, setActiveItem] = useState(1); // По умолчанию активен первый элемент
     const [check, setCheck] = useState(false);
+    const [addCheck, setAddCheck] = useState(false);
 
     const handleItemClick = (index) => {
         setActiveItem(index); // Устанавливаем активный элемент по индексу
@@ -18,11 +21,15 @@ const PopupSettingsTask = ({ onOpenSettingsTask }) => {
         setCheck(!check)
     }
 
+    const onAddCheck = () => {
+        setAddCheck(!addCheck)
+    }
+
     return (
         <div className='popup'>
             <div className='popup__wrapper popup__task'>
                 <div className="popup__close-wrapper">
-
+                    
                     <button className='popup__close-btn' onClick={onOpenSettingsTask}>
 
                     </button>
@@ -140,7 +147,7 @@ const PopupSettingsTask = ({ onOpenSettingsTask }) => {
                         
                     </ul>
 
-                    <button className="check__create-btn popup__check-btn">
+                    <button className="check__create-btn popup__check-btn" onClick={onAddCheck}>
                         <p className="check__create-btn-text popup__check-btn-text">
                             Добавить элемент
                         </p>
@@ -196,6 +203,9 @@ const PopupSettingsTask = ({ onOpenSettingsTask }) => {
                         </button>
                     </div>
                 </div>
+
+                {addCheck && <PopupAddCheck onAddCheck={onAddCheck}/>}
+                
                 
             </div>
         </div>

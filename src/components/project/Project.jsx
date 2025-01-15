@@ -5,6 +5,8 @@ import PopupSettingsProject from '../popups/popupSettingsProject/PopupSettingsPr
 import PopupProjectMembers from '../popups/popupProjectMembers/PopupProjectMembers';
 import PopupAddStage from '../popups/popupAddStage/PopupAddStage';
 import PopupSettingsStage from '../popups/popupSettingsStage/PopupSettingsStage';
+import PopupCreateTask from '../popups/popupCreateTask/PopupCreateTask';
+import PopupSettingsTask from '../popups/popupSettingsTask/PopupSettingsTask';
 
 import './project.scss'
 
@@ -13,6 +15,8 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
     const [createStage, setCreateStage] = useState(false);
     const [optionsStage, setOptionsStage] = useState(false);
     const [settingsStage, setSettingsStage] = useState(false);
+    const [createTask, setCreateTask] = useState(false);
+    const [settingsTask, setSettingsTask] = useState(false);
 
     const onOpenCreateStage = () => {
         setCreateStage(!createStage)
@@ -24,6 +28,14 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
 
     const onOpenSettingsStage = () => {
         setSettingsStage(!settingsStage)
+    }
+
+    const onOpenCreateTask = () => {
+        setCreateTask(!createTask)
+    }
+
+    const onOpenSettingsTask = () => {
+        setSettingsTask(!settingsTask)
     }
 
     return (
@@ -149,7 +161,7 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
                             </ul>}
                         </div>
 
-                        <div className="project__task">
+                        <div className="project__task" onClick={onOpenSettingsTask}>
                             <img className="project__task-img" src="../../../public/images/task.png"></img>
                             <div className="project__task-deadline">
                                 <p className="project__task-deadline-text">
@@ -263,7 +275,7 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
                             </div>
                         </div>
 
-                        <button className="project__tasks-btn">
+                        <button className="project__tasks-btn" onClick={onOpenCreateTask}>
                             <p className='project__tasks-btn-text'>
                                 Новая задача
                             </p>
@@ -292,6 +304,10 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
             {openProjectMembers && <PopupProjectMembers onOpenProjectMembers={onOpenProjectMembers} onEmployeePopup={onEmployeePopup}/>}
             {createStage && <PopupAddStage onOpenCreateStage={onOpenCreateStage}/>}
             {settingsStage && <PopupSettingsStage onOpenSettingsStage={onOpenSettingsStage}/>}
+            {createTask && <PopupCreateTask onOpenCreateTask={onOpenCreateTask}/>}
+            {settingsTask && <PopupSettingsTask onOpenSettingsTask={onOpenSettingsTask}/>}
+            
+            
             
 
         </section>

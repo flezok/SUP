@@ -1,0 +1,31 @@
+.popup__priority-items{
+    display: flex;
+
+    .popup__priority-item{
+        width: 45px;
+        height: 45px;
+        margin-right: 23px;
+        background-color: #212122;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &-text{
+            font-family: "Manrope-Regular", sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 50%;
+            color: #fff;
+        }
+    }
+
+    .popup__priority-item--active{
+        background-color: #599ef1;
+    }
+}
+
+.popup__btn-priority{
+    .popup__members-text::before{
+        content: url('../../../../public/images/priority.svg');
+    }
+}

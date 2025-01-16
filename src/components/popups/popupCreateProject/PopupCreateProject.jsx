@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import DatePicker from "react-datepicker";
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -8,13 +10,20 @@ import PopupAddMemberProject from '../popupAddMemberProject/PopupAddMemberProjec
 import './popupCreateProject.scss'
 
 const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMember }) => {
+    const availableUsers = useQuery({
+        queryKey: ["projectPopupAvailableUsers"],
+        queryFn: async () => {
+            const { data } = await axios.get("http://localhost:3000/user/forProject", { withCredentials: true });
+            return data;
+        }
+    });
 
     const [projectAvatar, setProjectAvatar] = useState('/images/downloadPhoto2.svg');
-    
+
 
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
-    
+
     // Функция для выбора фото
     const handleImageChange = (event) => {
         const file = event.target.files[0]; // Получаем выбранный файл
@@ -27,13 +36,13 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
         }
     };
 
-    
-        
+
+
 
     return (
         <div className='popup'>
             <div className='popup__wrapper'>
-                
+
 
                 <div className="popup__close-wrapper">
                     <h3 className="popup__title">
@@ -55,7 +64,7 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                     <div className="popup__img-wrapper">
                         <img className="popup__img-images" src={projectAvatar}></img>
                         <input className="popup__img-input" type="file" accept="image/*" onChange={handleImageChange}></input>
-                    </div> 
+                    </div>
                 </div>
 
                 <div className="popup__name-inner popup__description">
@@ -72,7 +81,7 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                         </p>
                     </button>
 
-                    
+
 
                     <div className="project__team-images popup__members-images">
                         <div className="project__team-wrapper-img popup__members-inner">
@@ -100,14 +109,14 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                         </p>
                     </label>
                     <DatePicker
-                    id="date"
-                    selectsRange={true}
-                    startDate={startDate}
-                    endDate={endDate}
-                    onChange={(update) => {
-                        setDateRange(update);
-                    }}
-                    isClearable={true}
+                        id="date"
+                        selectsRange={true}
+                        startDate={startDate}
+                        endDate={endDate}
+                        onChange={(update) => {
+                            setDateRange(update);
+                        }}
+                        isClearable={true}
                     />
                 </div>
 
@@ -124,8 +133,8 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                     </button>
                 </div>
 
-                {openAddMember && <PopupAddMemberProject onOpenAddMember={onOpenAddMember}/>}
-                
+                {openAddMember && <PopupAddMemberProject availableUsers={availableUsers} onOpenAddMember={onOpenAddMember} />}
+
             </div>
         </div>
     )

@@ -1,7 +1,8 @@
 import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet, redirect } from 'react-router-dom';
 import axios from 'axios';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 import Authorization from './components/authorization/Authorization';
@@ -20,6 +21,8 @@ import Registration from './components/registration/registration.jsx';
 import './normalize.scss'
 import './global.scss'
 
+const queryClient = new QueryClient();
+
 const App = () => {
     const [isFocusedSearch, setIsFocusedSearch] = useState(false);
     const [createProject, setCreateProject] = useState(false);
@@ -29,25 +32,25 @@ const App = () => {
     const [openProjectMembers, setOpenProjectMembers] = useState(false);
     const [confirmTitle, setConfirmTitle] = useState('');
     const [openSettingsProject, setOpenSettingsProject] = useState(false);
-    
+
 
     const onSearchPopupOpen = () => {
-      setIsFocusedSearch(true);
+        setIsFocusedSearch(true);
     };
 
     const onSearchPopupClose = () => {
-      setIsFocusedSearch(false);
+        setIsFocusedSearch(false);
     };
 
     const onOpenCreateProject = () => {
-        if (isFocusedSearch === true){
+        if (isFocusedSearch === true) {
             setIsFocusedSearch(false);
         }
         setCreateProject(!createProject);
     };
 
     const onEmployeePopup = () => {
-        if (isFocusedSearch === true){
+        if (isFocusedSearch === true) {
             setIsFocusedSearch(false);
         }
         setEmployeePopup(!employeePopup);
@@ -73,8 +76,7 @@ const App = () => {
     const router = createBrowserRouter([
         {
             path: "/auth",
-            element: <Authorization />,
-            index: true
+            element: <Authorization />
         },
         {
             path: "/registration",
@@ -84,17 +86,19 @@ const App = () => {
             path: "/",
             id: "root",
             loader: async () => {
-                const { data } = await axios.get("http://localhost:3000/user/check", { withCredentials: true });
-
-                return data;
+                return axios.get("http://localhost:3000/user/check", { withCredentials: true }).then(({ data }) => {
+                    return data;
+                }).catch(() => {
+                    return redirect("/auth");
+                });
             },
             element: (
                 <>
                     <Header onSearchPopupOpen={onSearchPopupOpen}
-                            onOpenCreateProject={onOpenCreateProject}/>
+                        onOpenCreateProject={onOpenCreateProject} />
                     <div className="container">
                         <Menu />
-                        {<Outlet />} 
+                        {<Outlet />}
                     </div>
                 </>
             ),
@@ -114,16 +118,16 @@ const App = () => {
                 },
                 {
                     path: "/project",
-                    element: <Project onOpenAddMember={onOpenAddMember} 
-                    openAddMember={openAddMember}
-                    onOpenConfirm={onOpenConfirm} 
-                    openConfirm={openConfirm} 
-                    onOpenSettingsProject={onOpenSettingsProject}
-                    openSettingsProject={openSettingsProject} 
-                    confirmTitle={confirmTitle}
-                    onOpenProjectMembers={onOpenProjectMembers}
-                    openProjectMembers={openProjectMembers}
-                    onEmployeePopup={onEmployeePopup}/>
+                    element: <Project onOpenAddMember={onOpenAddMember}
+                        openAddMember={openAddMember}
+                        onOpenConfirm={onOpenConfirm}
+                        openConfirm={openConfirm}
+                        onOpenSettingsProject={onOpenSettingsProject}
+                        openSettingsProject={openSettingsProject}
+                        confirmTitle={confirmTitle}
+                        onOpenProjectMembers={onOpenProjectMembers}
+                        openProjectMembers={openProjectMembers}
+                        onEmployeePopup={onEmployeePopup} />
                 },
                 {
                     path: "employees",
@@ -132,12 +136,13 @@ const App = () => {
             ]
         }
     ])
-    
+
 
     return (
         <StrictMode>
-            <RouterProvider router={router} />
-            {/* <BrowserRouter>
+            <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router} />
+                {/* <BrowserRouter>
                 <Authorization/>
                 <Header onSearchPopupOpen={onSearchPopupOpen}
                         onOpenCreateProject={onOpenCreateProject}/>
@@ -161,11 +166,12 @@ const App = () => {
                                                  onEmployeePopup={onEmployeePopup}/>} />
                         <Route path="/employees" element={<Employees onEmployeePopup={onEmployeePopup}/>} />
                     </Routes> */}
-                    {isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose}/>}
-                    {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember}/>}
-                    {employeePopup && <PopupEmployee onEmployeePopup={onEmployeePopup}/>}
+                {isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose} />}
+                {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember} />}
+                {employeePopup && <PopupEmployee onEmployeePopup={onEmployeePopup} />}
                 {/* </div>
             </BrowserRouter> */}
+            </QueryClientProvider>
         </StrictMode>
     );
 };

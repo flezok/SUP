@@ -114,10 +114,20 @@ const App = () => {
                 },
                 {
                     path: "/boards",
-                    element: <Boards />
+                    element: <Boards />,
+                    loader: async () => {
+                        const { data } = await axios.get("http://localhost:3000/project/all", { withCredentials: true });
+
+                        return data;
+                    }
                 },
                 {
                     path: "/project/:projectId",
+                    loader: async ({ params }) => {
+                        const { data } = await axios.get(`http://localhost:3000/project/${params.projectId}`, { withCredentials: true });
+
+                        return data;
+                    },
                     element: <Project onOpenAddMember={onOpenAddMember}
                         openAddMember={openAddMember}
                         onOpenConfirm={onOpenConfirm}

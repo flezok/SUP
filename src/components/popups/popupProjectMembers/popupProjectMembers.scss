@@ -20,11 +20,60 @@
         border-bottom: 1px solid #454554;
         height: 72px;
         padding: 16px;
+        align-items: center;
 
         &:nth-last-child(1){
             border-bottom: 1px solid transparent;
         }
     }
+
+    .popup__item-member-delete{
+        border-radius: 15px;
+        width: 160px;
+        height: 30px;
+        margin-right: 41px;
+        position: relative;
+        background-color: transparent;
+        cursor: pointer;
+        border: 1px solid #d00101;
+        text-align: left;
+        margin-right: 30px;
+        display: none;
+        padding: 0 24px 0 48px;
+
+        &-text{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 100%;
+            color: #d00101;
+            // padding-left: 48px;
+
+            &::before{
+                content: url('../../../../public/images/delete.svg');
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                left: 16px;
+                top: 2px;
+            }
+        }
+    }
+
+    .popup__add-item-container{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .popup__add-item:hover .popup__item-member-delete{
+        display: block;
+    }
+
+    .popup__add-item:hover .popup__add-item-container{
+        margin-right: 191px;
+    }
+    
 }
 
 .popup__wrapper.popup__project-members{

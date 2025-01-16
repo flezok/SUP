@@ -11,6 +11,7 @@ import PopupAddStage from '../popups/popupAddStage/PopupAddStage';
 import PopupSettingsStage from '../popups/popupSettingsStage/PopupSettingsStage';
 import PopupCreateTask from '../popups/popupCreateTask/PopupCreateTask';
 import PopupSettingsTask from '../popups/popupSettingsTask/PopupSettingsTask';
+import PopupAddMemberProjectInner from '../popups/popupAddMemberProjectInner/PopupAddMemberProjectInner';
 
 import './project.scss'
 
@@ -311,7 +312,9 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                 </div>
             </div>
 
-            {openAddMember && <PopupAddMemberProject availableUsers={availableUsers} users={users} setUsers={setUsers} onOpenAddMember={onOpenAddMember} />}
+            {/* {openAddMember && <PopupAddMemberProject availableUsers={availableUsers} users={users} setUsers={setUsers} onOpenAddMember={onOpenAddMember} />} */}
+            {openAddMember && <PopupAddMemberProjectInner availableUsers={availableUsers} users={users} setUsers={setUsers} onOpenAddMember={onOpenAddMember} />}
+            
             {openSettingsProject && <PopupSettingsProject onOpenConfirm={onOpenConfirm}
                 openConfirm={openConfirm}
                 onOpenSettingsProject={onOpenSettingsProject}

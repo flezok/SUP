@@ -21,47 +21,28 @@ const PopupProjectMembers = ({ onOpenProjectMembers, onEmployeePopup }) => {
                 </div>
 
                 <ul className="popup__add-items popup__items-members">
-                    <li className="popup__add-item" onClick={onEmployeePopup}>
-                        <div className="popup__add-item-wrapper">
-                            <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                            <p className="popup__add-item-name">
-                                Дмитрий Травин
-                            </p>
+                    <li className="popup__add-item" >
+                        <div className='popup__add-item-container' onClick={onEmployeePopup}>
+                            <div className="popup__add-item-wrapper">
+                                <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
+                                <p className="popup__add-item-name">
+                                    Дмитрий Травин
+                                </p>
+                            </div>
+                            <div className="popup__add-item-wrapper">
+                                <p className="popup__add-item-name popup__members-pos">
+                                    Senior-fronrent разработчик
+                                </p>
+                            </div>
                         </div>
-                        <div className="popup__add-item-wrapper">
-                            <p className="popup__add-item-name popup__members-pos">
-                                Senior-fronrent разработчик
+                        <button className='popup__item-member-delete'>
+                            <p className="popup__item-member-delete-text">
+                                Удалить
                             </p>
-                        </div>
+                        </button>
                     </li>
 
-                    <li className="popup__add-item" onClick={onEmployeePopup}>
-                        <div className="popup__add-item-wrapper">
-                            <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                            <p className="popup__add-item-name">
-                                Дмитрий Травин
-                            </p>
-                        </div>
-                        <div className="popup__add-item-wrapper">
-                            <p className="popup__add-item-name popup__members-pos">
-                                Senior-fronrent разработчик
-                            </p>
-                        </div>
-                    </li>
-
-                    <li className="popup__add-item" onClick={onEmployeePopup}>
-                        <div className="popup__add-item-wrapper">
-                            <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                            <p className="popup__add-item-name">
-                                Дмитрий Травин
-                            </p>
-                        </div>
-                        <div className="popup__add-item-wrapper">
-                            <p className="popup__add-item-name popup__members-pos">
-                                Senior-fronrent разработчик
-                            </p>
-                        </div>
-                    </li>
+                    
 
                     
                     

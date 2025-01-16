@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
+
 import "react-datepicker/dist/react-datepicker.css";
 
 import PopupAddMemberProject from '../popupAddMemberProject/PopupAddMemberProject';
@@ -18,11 +19,15 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
         }
     });
 
+    
+
     const [projectAvatar, setProjectAvatar] = useState('/images/downloadPhoto2.svg');
 
 
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
+    const [users, setUsers] = useState([]);
+    const [formData, setForm] = useState({ title: "", description: "", dates: dateRange, members: users.map((user) => user.id), projectAvatar });
 
     // Функция для выбора фото
     const handleImageChange = (event) => {
@@ -36,7 +41,19 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
         }
     };
 
+    const handleForm = (e) => {
+        e.preventDefault();
 
+        return axios.post("http://localhost:3000/project/create", {
+            title: formData.title,
+            description: formData.description,
+            dates: [startDate, endDate],
+            members: users.map(user => user.id),
+            projectAvatar
+        }, { withCredentials: true }).then((res) => {
+            window.location.href = `/project/${res.data.projectId}`;
+        });
+    };
 
 
     return (
@@ -58,7 +75,7 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                         <label className="popup__name-title" htmlFor='projectName'>
                             Название
                         </label>
-                        <input className="popup__name-input" id="projectName" type='text' placeholder='Напишите название...'></input>
+                        <input onChange={(e) => { setForm({ ...formData, title: e.target.value }) }} className="popup__name-input" id="projectName" type='text' placeholder='Напишите название...'></input>
                     </div>
 
                     <div className="popup__img-wrapper">
@@ -71,7 +88,7 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                     <label className="popup__name-title popup__description-title" htmlFor='projectDescription'>
                         Описание
                     </label>
-                    <textarea className="popup__name-input popup__description-input" id="projectDescription" type='text' placeholder='Напишите описание...'></textarea>
+                    <textarea onChange={(e) => { setForm({ ...formData, description: e.target.value }) }} className="popup__name-input popup__description-input" id="projectDescription" type='text' placeholder='Напишите описание...'></textarea>
                 </div>
 
                 <div className="popup__members">
@@ -84,7 +101,16 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
 
 
                     <div className="project__team-images popup__members-images">
-                        <div className="project__team-wrapper-img popup__members-inner">
+                        {
+                            users.slice(0, 3).map((user) => (
+                                <div key={user.id} className="project__team-wrapper-img popup__members-inner">
+                                    <img className="project__team-img popup__members-img" src={user.avatarBase64 ? user.avatarBase64 : '/images/defaultUser.png'}>
+
+                                    </img>
+                                </div>
+                            ))
+                        }
+                        {/* <div className="project__team-wrapper-img popup__members-inner">
                             <img className="project__team-img popup__members-img" src="../../../public/images/avatar1.png">
 
                             </img>
@@ -98,7 +124,7 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                             <img className="project__team-img popup__members-img" src="../../../public/images/avatar3.png">
 
                             </img>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -121,7 +147,7 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                 </div>
 
                 <div className="popup__btns">
-                    <button className="popup__btn popup__btn-add">
+                    <button onClick={handleForm} className="popup__btn popup__btn-add">
                         <p className="popup__btn-text">
                             Создать
                         </p>
@@ -133,7 +159,7 @@ const PopupCreateProject = ({ onOpenCreateProject, onOpenAddMember, openAddMembe
                     </button>
                 </div>
 
-                {openAddMember && <PopupAddMemberProject availableUsers={availableUsers} onOpenAddMember={onOpenAddMember} />}
+                {openAddMember && <PopupAddMemberProject users={users} setUsers={setUsers} availableUsers={availableUsers} onOpenAddMember={onOpenAddMember} />}
 
             </div>
         </div>

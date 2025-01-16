@@ -117,7 +117,7 @@ const App = () => {
                     element: <Boards />
                 },
                 {
-                    path: "/project",
+                    path: "/project/:projectId",
                     element: <Project onOpenAddMember={onOpenAddMember}
                         openAddMember={openAddMember}
                         onOpenConfirm={onOpenConfirm}

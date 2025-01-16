@@ -2,9 +2,16 @@ import { useState } from 'react';
 
 import './popupAddMemberProject.scss'
 
-const PopupAddMemberProject = ({ onOpenAddMember, availableUsers }) => {
+const PopupAddMemberProject = ({ onOpenAddMember, availableUsers, users, setUsers }) => {
 
-
+    const handleAddUser = (user) => {
+        if (users.find(({ id }) => id === user.id)) {
+            users = users.filter(({ id: uId }) => uId !== user.id);
+            setUsers(users);
+        } else {
+            setUsers((users) => [...users, user]);
+        };
+    };
 
     return (
         <div className="popup__members-add">
@@ -18,14 +25,14 @@ const PopupAddMemberProject = ({ onOpenAddMember, availableUsers }) => {
             <ul className="popup__add-items">
                 {
                     !availableUsers.isLoading && availableUsers.data.map((addUser) => (
-                        <li key={addUser.id} className="popup__add-item">
+                        <li onClick={() => { handleAddUser(addUser) }} key={addUser.id} className="popup__add-item">
                             <div className="popup__add-item-wrapper">
                                 <img className="popup__add-item-img" src={addUser.avatarBase64 ? addUser.avatarBase64 : '/images/defaultUser.png'}></img>
                                 <p className="popup__add-item-name">
                                     {addUser.firstName} {addUser.lastName}
                                 </p>
                             </div>
-                            <div className="popup__add-item-check"></div>
+                            {users.find(({ id }) => id === addUser.id) && <div className="popup__add-item-check"></div>}
                         </li>
                     ))
                 }

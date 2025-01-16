@@ -2,10 +2,11 @@ import { useState } from 'react';
 import DatePicker from "react-datepicker";
 
 import PopupAddCheck from './popupAddCheck/PopupAddCheck';
+import PopupAddMemberProject from '../popupAddMemberProject/PopupAddMemberProject';
 
 import './popupSettingsTask.scss'
 
-const PopupSettingsTask = ({ onOpenSettingsTask }) => {
+const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember }) => {
         
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
@@ -52,7 +53,7 @@ const PopupSettingsTask = ({ onOpenSettingsTask }) => {
                 </div>
 
                 <div className="popup__members">
-                    <button className="popup__members-btn">
+                    <button className="popup__members-btn" onClick={onOpenAddMember}>
                         <p className="popup__members-text">
                             Добавить участников
                         </p>
@@ -171,17 +172,16 @@ const PopupSettingsTask = ({ onOpenSettingsTask }) => {
                     <label className="popup__name-title popup__description-title" htmlFor='projectDescription'>
                         Комментарии
                     </label>
-                    <textarea className="popup__name-input popup__description-input" id="projectDescription" type='text' placeholder='Напишите комментарий...'></textarea>
-
-                    <div className="popup__comments-btns">
-                        <button className="popup__coments-btn">
-                            <p className="popup__coments-btn-text">
+                    <textarea className="popup__name-input popup__description-input popup__comments-input" id="projectDescription" type='text' placeholder='Напишите комментарий...'></textarea>
+                    <div className="popup__btns popup__confirm-btns popup__comments-btns">
+                        <button className="popup__btn popup__btn-add">
+                            <p className="popup__btn-text">
                                 Отправить
                             </p>
                         </button>
-                        <button className="popup__coments-btn">
-                            <p className="popup__coments-btn-text">
-                                Отменить    
+                        <button className="popup__btn popup__btn-cancel">
+                            <p className="popup__btn-text">
+                                Отменить
                             </p>
                         </button>
                     </div>
@@ -189,22 +189,53 @@ const PopupSettingsTask = ({ onOpenSettingsTask }) => {
 
                 <div className="popup__comments-list">
                     <div className="popup__list-item">
-                        <img className="popup__list-img"></img>
+                        <img className="popup__list-img" src="../../../../public/images/avatarHeader.png"></img>
                         <div className="popup__list-inner">
                             <p className="popup__list-name">
-
+                                Дмитрий Травин
                             </p>
                             <p className="popup__list-text">
-
+                                Тут текст моего супер крутого комментария о том как хотелось бы уже сделать этот диплом и получить хотя бы 3 да и всю сессию закрыть дааааа вот это было бы словано оуу дааа девочку на виранде оууу йееес
                             </p>
                         </div>
-                        <button className="popup__list-deletee">
+                        <button className="popup__list-delete">
+                            
+                        </button>
+                    </div>
+
+                    <div className="popup__list-item">
+                        <img className="popup__list-img" src="../../../../public/images/avatarHeader.png"></img>
+                        <div className="popup__list-inner">
+                            <p className="popup__list-name">
+                                Дмитрий Травин
+                            </p>
+                            <p className="popup__list-text">
+                                Тут текст моего супер крутого комментария о том как хотелось бы уже сделать этот диплом и получить хотя бы 3 да и всю сессию закрыть дааааа вот это было бы словано оуу дааа девочку на виранде оууу йееес
+                            </p>
+                        </div>
+                        <button className="popup__list-delete">
+                            
+                        </button>
+                    </div>
+
+                    <div className="popup__list-item">
+                        <img className="popup__list-img" src="../../../../public/images/avatarHeader.png"></img>
+                        <div className="popup__list-inner">
+                            <p className="popup__list-name">
+                                Дмитрий Травин
+                            </p>
+                            <p className="popup__list-text">
+                                Тут текст моего супер крутого комментария о том как хотелось бы уже сделать этот диплом и получить хотя бы 3 да и всю сессию закрыть дааааа вот это было бы словано оуу дааа девочку на виранде оууу йееес
+                            </p>
+                        </div>
+                        <button className="popup__list-delete">
                             
                         </button>
                     </div>
                 </div>
 
                 {addCheck && <PopupAddCheck onAddCheck={onAddCheck}/>}
+                {openAddMember && <PopupAddMemberProject />}
                 
                 
             </div>

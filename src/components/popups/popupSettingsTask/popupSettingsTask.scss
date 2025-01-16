@@ -158,3 +158,83 @@
         }
     }
 }
+
+.popup__name-input.popup__description-input.popup__comments-input{
+    height: 120px;
+    margin-bottom: 25px;
+}
+
+.popup__btns.popup__confirm-btns.popup__comments-btns{
+    justify-content: flex-start;
+    margin-bottom: 25px;
+}
+
+.popup__list-item{
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #454554;
+    padding: 10px 0;
+
+    &:nth-last-child(1){
+        border-bottom: 1px solid transparent;
+    }
+
+    .popup__list-img{
+        width: 48px;
+        height: 48px;
+        margin-right: 15px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .popup__list-name{
+        font-family: "Manrope-Bold", sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 100%;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .popup__list-text{
+        font-family: "Manrope-Regular", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 120%;
+        color: #fff;
+        margin-right: 30px;
+    }
+
+    .popup__list-delete{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(-50%);
+        display: none;
+
+        &::before{
+            content: url('../../../../public/images/delete.svg');
+            width: 24px;
+            height: 24px;
+
+        }
+    }
+
+    &:hover .popup__list-delete{
+        display: block;
+    }
+}
+
+// .popup__list-item:hover .popup__list-delete{
+//         display: block
+//     }

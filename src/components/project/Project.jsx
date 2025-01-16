@@ -305,7 +305,7 @@ const Project = ({openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, on
             {createStage && <PopupAddStage onOpenCreateStage={onOpenCreateStage}/>}
             {settingsStage && <PopupSettingsStage onOpenSettingsStage={onOpenSettingsStage}/>}
             {createTask && <PopupCreateTask onOpenCreateTask={onOpenCreateTask}/>}
-            {settingsTask && <PopupSettingsTask onOpenSettingsTask={onOpenSettingsTask}/>}
+            {settingsTask && <PopupSettingsTask onOpenSettingsTask={onOpenSettingsTask} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember}/>}
             
             
             

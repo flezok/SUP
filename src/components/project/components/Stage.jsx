@@ -1,8 +1,29 @@
+import axios from "axios";
 import { useState } from "react";
-export default function Stage({ onOpenOptionsStage, onOpenSettingsStage, onOpenCreateTask, title, color, projectId, id, setLastStage }) {
+import { useQuery } from "@tanstack/react-query";
+import Task from "./Task";
+
+export default function Stage({ onOpenOptionsStage, onOpenSettingsStage, onOpenCreateTask, title, color, projectId, id, setLastStage, stagesQuery }) {
 
     const [optionsStage, setOptionsStage] = useState(false);
     const [settingsStage, setSettingsStage] = useState(false);
+
+    const handleDeleteStage = () => {
+        axios.delete(`http://localhost:3000/project/${projectId}/stage/${id}`, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                stagesQuery.refetch();
+            };
+        });
+    };
+
+    const tasksQuery = useQuery({
+        queryKey: ["stageTasks", id],
+        queryFn: async () => {
+            const { data } = await axios.get(`http://localhost:3000/project/${projectId}/stage/${id}/tasks`, { withCredentials: true });
+
+            return data;
+        }
+    });
 
     return (
         <>
@@ -22,7 +43,7 @@ export default function Stage({ onOpenOptionsStage, onOpenSettingsStage, onOpenC
                                 Редактировать
                             </p>
                         </li>
-                        <li className='project__stage-item'>
+                        <li onClick={handleDeleteStage} className='project__stage-item'>
                             <p className="project__stage-item-text">
                                 Удалить
                             </p>
@@ -32,6 +53,9 @@ export default function Stage({ onOpenOptionsStage, onOpenSettingsStage, onOpenC
 
                 {
                     //TODO: map по задачам этапа
+                    !tasksQuery.isLoading && tasksQuery.data.map((task) => (
+                        <Task key={task.id} {...task} />
+                    ))
                 }
 
                 <button className="project__tasks-btn" onClick={() => { onOpenCreateTask(); setLastStage(id); }}>

@@ -20,6 +20,7 @@ import Registration from './components/registration/registration.jsx';
 
 import './normalize.scss'
 import './global.scss'
+import PopupSettingsTask from './components/popups/popupSettingsTask/PopupSettingsTask.jsx';
 
 const queryClient = new QueryClient();
 
@@ -132,7 +133,13 @@ const App = () => {
                         confirmTitle={confirmTitle}
                         onOpenProjectMembers={onOpenProjectMembers}
                         openProjectMembers={openProjectMembers}
-                        onEmployeePopup={onEmployeePopup} />
+                        onEmployeePopup={onEmployeePopup} />,
+                    children: [
+                        {
+                            path: "task/:taskId",
+                            element: <PopupSettingsTask />
+                        }
+                    ]
                 },
                 {
                     path: "employees",

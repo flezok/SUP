@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Outlet, useLoaderData } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -157,7 +157,7 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
 
                         {
                             !stagesQuery.isLoading && stagesQuery.data.map((stage) => (
-                                <Stage key={stage.id} {...stage} onOpenOptionsStage={onOpenOptionsStage} onOpenSettingsStage={onOpenSettingsStage} onOpenCreateTask={onOpenCreateTask} setLastStage={setLastStage} />
+                                <Stage projectId={projectData.id} key={stage.id} {...stage} onOpenOptionsStage={onOpenOptionsStage} onOpenSettingsStage={onOpenSettingsStage} onOpenCreateTask={onOpenCreateTask} setLastStage={setLastStage} stagesQuery={stagesQuery} />
                             ))
                         }
                         {/* <div className="project__tasks-stage">
@@ -318,6 +318,7 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                 </div>
             </div>
 
+            <Outlet />
             {/* {openAddMember && <PopupAddMemberProject availableUsers={availableUsers} users={users} setUsers={setUsers} onOpenAddMember={onOpenAddMember} />} */}
             {openAddMember && <PopupAddMemberProjectInner projectId={projectData.id} onOpenAddMember={onOpenAddMember} />}
 

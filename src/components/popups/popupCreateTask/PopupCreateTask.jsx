@@ -1,18 +1,31 @@
 import { useState } from 'react';
 import DatePicker from "react-datepicker";
+import axios from 'axios';
+import { useQueryClient } from '@tanstack/react-query';
 
 import "react-datepicker/dist/react-datepicker.css";
 
 import './popupCreateTask.scss'
 
 const PopupCreateTask = ({ onOpenCreateTask, projectId, lastClickedStage }) => {
+    const client = useQueryClient();
 
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
     const [activeItem, setActiveItem] = useState(1); // По умолчанию активен первый элемент
+    const [formData, setForm] = useState({ projectId, stageId: lastClickedStage, title: "", description: "", dates: dateRange, priority: activeItem + 1 });
 
     const handleItemClick = (index) => {
         setActiveItem(index); // Устанавливаем активный элемент по индексу
+    };
+
+    const handleSubmit = () => {
+        axios.post("http://localhost:3000/task/create", formData, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                client.invalidateQueries({ queryKey: ["stageTasks", lastClickedStage] });
+                onOpenCreateTask();
+            };
+        });
     };
 
     return (
@@ -33,7 +46,7 @@ const PopupCreateTask = ({ onOpenCreateTask, projectId, lastClickedStage }) => {
                         <label className="popup__name-title" htmlFor='projectName'>
                             Название
                         </label>
-                        <input className="popup__name-input" id="projectName" type='text' placeholder='Напишите название...'></input>
+                        <input onChange={(e) => { setForm({ ...formData, title: e.target.value }) }} className="popup__name-input" id="projectName" type='text' placeholder='Напишите название...'></input>
                     </div>
                 </div>
 
@@ -41,7 +54,7 @@ const PopupCreateTask = ({ onOpenCreateTask, projectId, lastClickedStage }) => {
                     <label className="popup__name-title popup__description-title" htmlFor='projectDescription'>
                         Описание
                     </label>
-                    <textarea className="popup__name-input popup__description-input" id="projectDescription" type='text' placeholder='Напишите описание...'></textarea>
+                    <textarea onChange={(e) => { setForm({ ...formData, description: e.target.value }) }} className="popup__name-input popup__description-input" id="projectDescription" type='text' placeholder='Напишите описание...'></textarea>
                 </div>
 
                 <div className="popup__members">
@@ -56,7 +69,7 @@ const PopupCreateTask = ({ onOpenCreateTask, projectId, lastClickedStage }) => {
                             <div
                                 key={index}
                                 className={`popup__priority-item ${activeItem === index ? 'popup__priority-item--active' : ''}`}
-                                onClick={() => handleItemClick(index)}
+                                onClick={() => { handleItemClick(index); setForm({ ...formData, priority: index + 1 }) }}
                             >
                                 <p className="popup__priority-item-text">{priority}</p>
                             </div>
@@ -77,13 +90,14 @@ const PopupCreateTask = ({ onOpenCreateTask, projectId, lastClickedStage }) => {
                         endDate={endDate}
                         onChange={(update) => {
                             setDateRange(update);
+                            setForm({ ...formData, dates: update })
                         }}
                         isClearable={true}
                     />
                 </div>
 
                 <div className="popup__btns">
-                    <button className="popup__btn popup__btn-add">
+                    <button className="popup__btn popup__btn-add" onClick={handleSubmit}>
                         <p className="popup__btn-text">
                             Создать
                         </p>

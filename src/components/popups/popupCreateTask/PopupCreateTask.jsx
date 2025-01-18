@@ -5,8 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import './popupCreateTask.scss'
 
-const PopupCreateTask = ({ onOpenCreateTask }) => {
-        
+const PopupCreateTask = ({ onOpenCreateTask, projectId, lastClickedStage }) => {
+
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
     const [activeItem, setActiveItem] = useState(1); // По умолчанию активен первый элемент
@@ -18,7 +18,7 @@ const PopupCreateTask = ({ onOpenCreateTask }) => {
     return (
         <div className='popup'>
             <div className='popup__wrapper'>
-                
+
                 <div className="popup__close-wrapper">
                     <h3 className="popup__title">
                         Создание задачи
@@ -71,14 +71,14 @@ const PopupCreateTask = ({ onOpenCreateTask }) => {
                         </p>
                     </label>
                     <DatePicker
-                    id="date"
-                    selectsRange={true}
-                    startDate={startDate}
-                    endDate={endDate}
-                    onChange={(update) => {
-                        setDateRange(update);
-                    }}
-                    isClearable={true}
+                        id="date"
+                        selectsRange={true}
+                        startDate={startDate}
+                        endDate={endDate}
+                        onChange={(update) => {
+                            setDateRange(update);
+                        }}
+                        isClearable={true}
                     />
                 </div>
 
@@ -94,8 +94,8 @@ const PopupCreateTask = ({ onOpenCreateTask }) => {
                         </p>
                     </button>
                 </div>
-                
-                
+
+
             </div>
         </div>
     )

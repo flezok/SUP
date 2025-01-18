@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import './popupAddStage.scss'
 
-const PopupAddStage = ({ onOpenCreateStage, projectId }) => {
+const PopupAddStage = ({ onOpenCreateStage, projectId, stagesQuery }) => {
 
     const [colorStage, setColorStage] = useState("rgba(255, 255, 255, 1)");
     const [pickColor, setPickColor] = useState(false);
@@ -26,6 +26,7 @@ const PopupAddStage = ({ onOpenCreateStage, projectId }) => {
             projectId
         }, { withCredentials: true }).then((res) => {
             if (res.data.success) {
+                stagesQuery.refetch();
                 onOpenCreateStage();
             };
         });

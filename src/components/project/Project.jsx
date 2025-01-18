@@ -22,6 +22,7 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
     const [settingsStage, setSettingsStage] = useState(false);
     const [createTask, setCreateTask] = useState(false);
     const [settingsTask, setSettingsTask] = useState(false);
+    const [lastClickedStage, setLastStage] = useState("");
 
     const projectData = useLoaderData();
 
@@ -153,13 +154,13 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                 <div className="project__container-wrapper">
                     <div className="project__tasks-wrapper">
 
-                        
-                            {
-                                !stagesQuery.isLoading && stagesQuery.data.map((stage) => (
-                                    <Stage key={stage.id} {...stage} onOpenOptionsStage={onOpenOptionsStage} onOpenSettingsStage={onOpenSettingsStage} />
-                                ))
-                            }
-                            {/* <div className="project__tasks-stage">
+
+                        {
+                            !stagesQuery.isLoading && stagesQuery.data.map((stage) => (
+                                <Stage key={stage.id} {...stage} onOpenOptionsStage={onOpenOptionsStage} onOpenSettingsStage={onOpenSettingsStage} onOpenCreateTask={onOpenCreateTask} setLastStage={setLastStage} />
+                            ))
+                        }
+                        {/* <div className="project__tasks-stage">
                                 <div className='project__stage-wrapper'>
                                     <div className='project__stage-color'></div>
                                     <p className='project__stage-text'>
@@ -301,7 +302,7 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                                     Новая задача
                                 </p>
                             </button> */}
-                       
+
 
 
 
@@ -325,9 +326,9 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                 onOpenSettingsProject={onOpenSettingsProject}
                 confirmTitle={confirmTitle} />}
             {openProjectMembers && <PopupProjectMembers projectId={projectData.id} onOpenProjectMembers={onOpenProjectMembers} onEmployeePopup={onEmployeePopup} />}
-            {createStage && <PopupAddStage projectId={projectData.id} onOpenCreateStage={onOpenCreateStage} />}
+            {createStage && <PopupAddStage projectId={projectData.id} onOpenCreateStage={onOpenCreateStage} stagesQuery={stagesQuery} />}
             {settingsStage && <PopupSettingsStage onOpenSettingsStage={onOpenSettingsStage} />}
-            {createTask && <PopupCreateTask onOpenCreateTask={onOpenCreateTask} />}
+            {createTask && <PopupCreateTask onOpenCreateTask={onOpenCreateTask} projectId={projectData.id} lastClickedStage={lastClickedStage} />}
             {settingsTask && <PopupSettingsTask onOpenSettingsTask={onOpenSettingsTask} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember} />}
 
 

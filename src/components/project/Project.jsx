@@ -153,13 +153,13 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                 <div className="project__container-wrapper">
                     <div className="project__tasks-wrapper">
 
-                        <div className='project__tasks'>
+                        
                             {
                                 !stagesQuery.isLoading && stagesQuery.data.map((stage) => (
                                     <Stage key={stage.id} {...stage} onOpenOptionsStage={onOpenOptionsStage} onOpenSettingsStage={onOpenSettingsStage} />
                                 ))
                             }
-                            <div className="project__tasks-stage">
+                            {/* <div className="project__tasks-stage">
                                 <div className='project__stage-wrapper'>
                                     <div className='project__stage-color'></div>
                                     <p className='project__stage-text'>
@@ -300,8 +300,8 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                                 <p className='project__tasks-btn-text'>
                                     Новая задача
                                 </p>
-                            </button>
-                        </div>
+                            </button> */}
+                       
 
 
 

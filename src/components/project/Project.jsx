@@ -21,7 +21,6 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
     const [settingsStage, setSettingsStage] = useState(false);
     const [createTask, setCreateTask] = useState(false);
     const [settingsTask, setSettingsTask] = useState(false);
-    const [users, setUsers] = useState([]);
 
     const projectData = useLoaderData();
 
@@ -44,15 +43,6 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
     const onOpenSettingsTask = () => {
         setSettingsTask(!settingsTask)
     }
-
-    const availableUsers = useQuery({
-        queryKey: ["projectAvailableUsers"],
-        queryFn: async () => {
-            const { data } = await axios.get("http://localhost:3000/user/forProject", { withCredentials: true });
-
-            return data;
-        }
-    });
 
     return (
         <section className='project'>
@@ -313,13 +303,13 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
             </div>
 
             {/* {openAddMember && <PopupAddMemberProject availableUsers={availableUsers} users={users} setUsers={setUsers} onOpenAddMember={onOpenAddMember} />} */}
-            {openAddMember && <PopupAddMemberProjectInner availableUsers={availableUsers} users={users} setUsers={setUsers} onOpenAddMember={onOpenAddMember} />}
-            
+            {openAddMember && <PopupAddMemberProjectInner projectId={projectData.id} onOpenAddMember={onOpenAddMember} />}
+
             {openSettingsProject && <PopupSettingsProject onOpenConfirm={onOpenConfirm}
                 openConfirm={openConfirm}
                 onOpenSettingsProject={onOpenSettingsProject}
                 confirmTitle={confirmTitle} />}
-            {openProjectMembers && <PopupProjectMembers onOpenProjectMembers={onOpenProjectMembers} onEmployeePopup={onEmployeePopup} />}
+            {openProjectMembers && <PopupProjectMembers projectId={projectData.id} onOpenProjectMembers={onOpenProjectMembers} onEmployeePopup={onEmployeePopup} />}
             {createStage && <PopupAddStage onOpenCreateStage={onOpenCreateStage} />}
             {settingsStage && <PopupSettingsStage onOpenSettingsStage={onOpenSettingsStage} />}
             {createTask && <PopupCreateTask onOpenCreateTask={onOpenCreateTask} />}

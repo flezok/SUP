@@ -1,17 +1,41 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 import './popupAddMemberProjectInner.scss'
 
-const PopupAddMemberProjectInner = ({ onOpenAddMember }) => {
+const PopupAddMemberProjectInner = ({ onOpenAddMember, projectId }) => {
 
-    // const handleAddUser = (user) => {
-    //     if (users.find(({ id }) => id === user.id)) {
-    //         users = users.filter(({ id: uId }) => uId !== user.id);
-    //         setUsers(users);
-    //     } else {
-    //         setUsers((users) => [...users, user]);
-    //     };
-    // };
+    const [users, setUsers] = useState([]);
+
+    const handleAddUser = (user) => {
+        if (users.find(({ id }) => id === user.id)) {
+            let fUsers = users.filter(({ id: uId }) => uId !== user.id);
+            setUsers(fUsers);
+        } else {
+            setUsers((users) => [...users, user]);
+        };
+    };
+
+    const availableUsers = useQuery({
+        queryKey: ["projectAvailableUsers", projectId],
+        queryFn: async () => {
+            const { data } = await axios.get(`http://localhost:3000/project/${projectId}/availableUsers`, { withCredentials: true });
+
+            return data;
+        }
+    });
+
+    const handleAddMembers = () => {
+        axios.post(`http://localhost:3000/project/${projectId}/addMembers`, {
+            members: users.map((u) => u.id)
+        }, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                availableUsers.refetch();
+                setUsers([]);
+            };
+        });
+    };
 
     return (
         <div className="popup__members-add popup__members-add-inner">
@@ -23,7 +47,7 @@ const PopupAddMemberProjectInner = ({ onOpenAddMember }) => {
             </div>
             <input className="popup__add-input" type="text" placeholder='Поиск сотрудников'></input>
             <ul className="popup__add-items">
-                {/* {
+                {
                     !availableUsers.isLoading && availableUsers.data.map((addUser) => (
                         <li onClick={() => { handleAddUser(addUser) }} key={addUser.id} className="popup__add-item">
                             <div className="popup__add-item-wrapper">
@@ -35,158 +59,10 @@ const PopupAddMemberProjectInner = ({ onOpenAddMember }) => {
                             {users.find(({ id }) => id === addUser.id) && <div className="popup__add-item-check"></div>}
                         </li>
                     ))
-                } */}
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
-                
-                <li className="popup__add-item">
-                    <div className="popup__add-item-wrapper">
-                        <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
-                        <p className="popup__add-item-name">
-                            Дмитрий Травин
-                        </p>
-                    </div>
-                    <div className="popup__add-item-check"></div>
-                </li>
+                }
             </ul>
 
-            <button className="popup__addMember-btn">
+            <button onClick={handleAddMembers} className="popup__addMember-btn">
                 <p className="popup__addMember-btn-text">
                     Добавить
                 </p>

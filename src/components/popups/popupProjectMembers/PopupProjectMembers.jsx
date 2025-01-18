@@ -1,16 +1,17 @@
-import {  } from 'react';
+import { } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import './popupProjectMembers.scss'
 
 const PopupProjectMembers = ({ onOpenProjectMembers, onEmployeePopup }) => {
-    
 
-        
+
+
 
     return (
         <div className='popup'>
             <div className='popup__wrapper popup__project-members'>
-                
+
                 <div className="popup__close-wrapper">
                     <h3 className="popup__title">
                         Участники проекта
@@ -42,13 +43,13 @@ const PopupProjectMembers = ({ onOpenProjectMembers, onEmployeePopup }) => {
                         </button>
                     </li>
 
-                    
 
-                    
-                    
+
+
+
                 </ul>
-                
-                
+
+
             </div>
         </div>
     )

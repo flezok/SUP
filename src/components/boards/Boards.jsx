@@ -1,12 +1,38 @@
 import { useState } from 'react';
 import { useNavigate, useLoaderData } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
+import ProjectBoard from './components/ProjectBoard';
 
 import './boards.scss'
 
 const Boards = ({ }) => {
 
-    const initialProjects = useLoaderData();
+    // const initialProjects = useLoaderData();
+    const allProjects = useQuery({
+        queryKey: ["projectType", "all"],
+        queryFn: async () => {
+            const { data } = await axios.get("http://localhost:3000/project/all?projectType=all", { withCredentials: true });
+            return data;
+        }
+    });
+
+    const lastVisitedProjects = useQuery({
+        queryKey: ["projectType", "lastVisited"],
+        queryFn: async () => {
+            const { data } = await axios.get("http://localhost:3000/project/all?projectType=lastVisited", { withCredentials: true });
+            return data;
+        }
+    });
+
+    const favoriteProjects = useQuery({
+        queryKey: ["projectType", "favorite"],
+        queryFn: async () => {
+            const { data } = await axios.get("http://localhost:3000/project/all?projectType=favorite", { withCredentials: true });
+            return data;
+        }
+    });
 
     const [isFollowed, setIsFollowed] = useState(false); // Состояние кнопки
     const navigate = useNavigate();
@@ -32,293 +58,11 @@ const Boards = ({ }) => {
                         Избранные доски
                     </h3>
                     <div className="boards__items">
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
+                        {
+                            !favoriteProjects.isLoading && favoriteProjects.data.map((project) => (
+                                <ProjectBoard key={project.id} {...project} />
+                            ))
+                        }
 
                     </div>
 
@@ -331,23 +75,11 @@ const Boards = ({ }) => {
                     </h3>
 
                     <div className="boards__items">
-                        <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                onClick={handleButtonClick}>
-                            </button>
-
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div>
-
+                        {
+                            !lastVisitedProjects.isLoading && lastVisitedProjects.data.map((project) => (
+                                <ProjectBoard key={project.id} {...project} />
+                            ))
+                        }
                     </div>
                 </div>
 
@@ -356,40 +88,9 @@ const Boards = ({ }) => {
                         Все доски
                     </h3>
                     <div className="boards__items">
-                        {/* <div className="boards__item">
-                            <div className="boards__item-wrapper" onClick={handleBoardClick}>
-                                <img className="boards__item-img" src="../../../public/images/projectLast.jpg"></img>
-                
-                            </div>
-                            <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                        onClick={handleButtonClick}>
-                            </button>
-                            
-                            <h4 className="boards__item-title">
-                                Мой проджект
-                            </h4>
-                            <p className='boards__item-text'>
-                                Вау какой крутой у меня супер проджект всем проджектам проджект
-                            </p>
-                        </div> */}
                         {
-                            initialProjects.map((project) => (
-                                <div key={project.id} className="boards__item">
-                                    <div className="boards__item-wrapper" onClick={() => { handleBoardClick(project.id); }}>
-                                        <img className="boards__item-img" src={project.projectAvatar}></img>
-
-                                    </div>
-                                    <button className={`boards__item-btn ${isFollowed ? "boards__item-btn--follow" : ""}`}
-                                        onClick={handleButtonClick}>
-                                    </button>
-
-                                    <h4 className="boards__item-title">
-                                        {project.title}
-                                    </h4>
-                                    <p className='boards__item-text'>
-                                        {project.description}
-                                    </p>
-                                </div>
+                            !allProjects.isLoading && allProjects.data.map((project) => (
+                                <ProjectBoard key={project.id} {...project} />
                             ))
                         }
                     </div>

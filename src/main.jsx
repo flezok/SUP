@@ -114,12 +114,7 @@ const App = () => {
                 },
                 {
                     path: "/boards",
-                    element: <Boards />,
-                    // loader: async () => {
-                    //     const { data } = await axios.get("http://localhost:3000/project/all", { withCredentials: true });
-
-                    //     return data;
-                    // }
+                    element: <Boards />
                 },
                 {
                     path: "/project/:projectId",

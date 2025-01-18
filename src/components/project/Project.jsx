@@ -14,6 +14,7 @@ import PopupSettingsTask from '../popups/popupSettingsTask/PopupSettingsTask';
 import PopupAddMemberProjectInner from '../popups/popupAddMemberProjectInner/PopupAddMemberProjectInner';
 
 import './project.scss'
+import Stage from './components/Stage';
 
 const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, onOpenSettingsProject, openSettingsProject, confirmTitle, openProjectMembers, onOpenProjectMembers, onEmployeePopup }) => {
     const [createStage, setCreateStage] = useState(false);
@@ -43,6 +44,15 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
     const onOpenSettingsTask = () => {
         setSettingsTask(!settingsTask)
     }
+
+    const stagesQuery = useQuery({
+        queryKey: ["projectStages", projectData.projectId],
+        queryFn: async () => {
+            const { data } = await axios.get(`http://localhost:3000/project/${projectData.id}/stages`, { withCredentials: true });
+
+            return data;
+        }
+    })
 
     return (
         <section className='project'>
@@ -144,6 +154,11 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                     <div className="project__tasks-wrapper">
 
                         <div className='project__tasks'>
+                            {
+                                !stagesQuery.isLoading && stagesQuery.data.map((stage) => (
+                                    <Stage key={stage.id} {...stage} onOpenOptionsStage={onOpenOptionsStage} onOpenSettingsStage={onOpenSettingsStage} />
+                                ))
+                            }
                             <div className="project__tasks-stage">
                                 <div className='project__stage-wrapper'>
                                     <div className='project__stage-color'></div>
@@ -310,7 +325,7 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                 onOpenSettingsProject={onOpenSettingsProject}
                 confirmTitle={confirmTitle} />}
             {openProjectMembers && <PopupProjectMembers projectId={projectData.id} onOpenProjectMembers={onOpenProjectMembers} onEmployeePopup={onEmployeePopup} />}
-            {createStage && <PopupAddStage onOpenCreateStage={onOpenCreateStage} />}
+            {createStage && <PopupAddStage projectId={projectData.id} onOpenCreateStage={onOpenCreateStage} />}
             {settingsStage && <PopupSettingsStage onOpenSettingsStage={onOpenSettingsStage} />}
             {createTask && <PopupCreateTask onOpenCreateTask={onOpenCreateTask} />}
             {settingsTask && <PopupSettingsTask onOpenSettingsTask={onOpenSettingsTask} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember} />}

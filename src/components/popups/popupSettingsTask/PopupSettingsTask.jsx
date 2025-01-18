@@ -4,7 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import PopupAddCheck from './popupAddCheck/PopupAddCheck';
-import PopupAddMemberProject from '../popupAddMemberProject/PopupAddMemberProject';
+// import PopupAddMemberProject from '../popupAddMemberProject/PopupAddMemberProject';
+import PopupAddMemberTask from './popupAddMemberTask/PopupAddMemberTask';
 
 import './popupSettingsTask.scss'
 import axios from 'axios';
@@ -12,6 +13,7 @@ import axios from 'axios';
 const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember }) => {
     const navigate = useNavigate();
     const { taskId } = useParams();
+    const [openAddMemberTask, setOpenAddMemberTask] = useState(false)
 
     const taskQuery = useQuery({
         queryKey: ["task", taskId],
@@ -21,6 +23,10 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
             return data;
         }
     });
+
+    const onOpenAddMemberTask = () => {
+        setOpenAddMemberTask(!openAddMemberTask)
+    }
 
     const handleChange = (property, val) => {
         axios.post(`http://localhost:3000/task/${taskId}/update/${property}`, {
@@ -79,7 +85,7 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                 </div>
 
                 <div className="popup__members">
-                    <button className="popup__members-btn" onClick={onOpenAddMember}>
+                    <button className="popup__members-btn" onClick={onOpenAddMemberTask}>
                         <p className="popup__members-text">
                             Добавить участников
                         </p>
@@ -262,7 +268,7 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                 </div>
 
                 {addCheck && <PopupAddCheck onAddCheck={onAddCheck} />}
-                {openAddMember && <PopupAddMemberProject />}
+                {openAddMemberTask && <PopupAddMemberTask onOpenAddMemberTask={onOpenAddMemberTask}/>}
 
 
             </div>

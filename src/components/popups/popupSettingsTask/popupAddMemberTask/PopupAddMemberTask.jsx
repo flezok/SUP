@@ -1,8 +1,31 @@
 import { useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 
 import '../../popupAddMemberProject/popupAddMemberProject.scss'
+import axios from 'axios';
 
-const PopupAddMemberTask = ({ onOpenAddMemberTask }) => {
+const PopupAddMemberTask = ({ onOpenAddMemberTask, taskMembers }) => {
+    const { taskId, projectId } = useParams();
+    const client = useQueryClient();
+
+    const availableUsers = useQuery({
+        queryKey: ["taskUsers", projectId, taskId],
+        queryFn: async () => {
+            const { data } = await axios.get(`http://localhost:3000/project/${projectId}/taskAvailableUsers`, { withCredentials: true });
+            return data;
+        }
+    });
+
+    const handleAddUser = (id) => {
+        axios.post(`http://localhost:3000/task/${taskId}/assign`, {
+            memberId: id
+        }, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                client.invalidateQueries({ queryKey: ["task", taskId] });
+            };
+        })
+    };
 
     // const handleAddUser = (user) => {
     //     if (users.find(({ id }) => id === user.id)) {
@@ -23,20 +46,20 @@ const PopupAddMemberTask = ({ onOpenAddMemberTask }) => {
             </div>
             <input className="popup__add-input" type="text" placeholder='Поиск сотрудников'></input>
             <ul className="popup__add-items">
-                {/* {
+                {
                     !availableUsers.isLoading && availableUsers.data.map((addUser) => (
-                        <li onClick={() => { handleAddUser(addUser) }} key={addUser.id} className="popup__add-item">
+                        <li onClick={() => { handleAddUser(addUser.id) }} key={addUser.id} className="popup__add-item">
                             <div className="popup__add-item-wrapper">
                                 <img className="popup__add-item-img" src={addUser.avatarBase64 ? addUser.avatarBase64 : '/images/defaultUser.png'}></img>
                                 <p className="popup__add-item-name">
                                     {addUser.firstName} {addUser.lastName}
                                 </p>
                             </div>
-                            {users.find(({ id }) => id === addUser.id) && <div className="popup__add-item-check"></div>}
+                            {taskMembers.find((id) => id === addUser.id) && <div className="popup__add-item-check"></div>}
                         </li>
                     ))
-                } */}
-                <li className="popup__add-item">
+                }
+                {/* <li className="popup__add-item">
                     <div className="popup__add-item-wrapper">
                         <img className="popup__add-item-img" src='../../../../public/images/avatarHeader.png'></img>
                         <p className="popup__add-item-name">
@@ -183,7 +206,7 @@ const PopupAddMemberTask = ({ onOpenAddMemberTask }) => {
                         </p>
                     </div>
                     <div className="popup__add-item-check"></div>
-                </li>
+                </li> */}
             </ul>
         </div>
     )

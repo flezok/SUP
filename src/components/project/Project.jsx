@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { Outlet, useLoaderData, useNavigate } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -24,6 +24,7 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
     const [settingsTask, setSettingsTask] = useState(false);
     const [lastClickedStage, setLastStage] = useState("");
 
+    const navigate = useNavigate();
     const projectData = useLoaderData();
 
     const onOpenCreateStage = () => {
@@ -97,7 +98,7 @@ const Project = ({ openAddMember, onOpenAddMember, onOpenConfirm, openConfirm, o
                 </div>
 
                 <div className="project__setting project__header-item">
-                    <button className="project__setting-btn" onClick={onOpenSettingsProject}>
+                    <button className="project__setting-btn" onClick={() => { navigate("settings"); }}>
                         <p className="project__setting-text">
                             Настройки
                         </p>

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import PopupAddCheck from './popupAddCheck/PopupAddCheck';
+import Comment from './components/Comment';
 // import PopupAddMemberProject from '../popupAddMemberProject/PopupAddMemberProject';
 import PopupAddMemberTask from './popupAddMemberTask/PopupAddMemberTask';
 
@@ -24,6 +25,14 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
         }
     });
 
+    const commentsQuery = useQuery({
+        queryKey: ["comments", taskId],
+        queryFn: async () => {
+            const { data } = await axios.get(`http://localhost:3000/task/${taskId}/comments`, { withCredentials: true });
+            return data;
+        }
+    });
+
     const onOpenAddMemberTask = () => {
         setOpenAddMemberTask(!openAddMemberTask)
     }
@@ -31,7 +40,11 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
     const handleChange = (property, val) => {
         axios.post(`http://localhost:3000/task/${taskId}/update/${property}`, {
             value: val
-        }, { withCredentials: true })
+        }, { withCredentials: true }).then((res) => {
+            if (res.data.success && property === "priority") {
+                taskQuery.refetch();
+            };
+        })
     };
 
     const [dateRange, setDateRange] = useState([null, null]);
@@ -39,6 +52,7 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
     const [activeItem, setActiveItem] = useState(taskQuery.data?.priority - 1); // По умолчанию активен первый элемент
     const [check, setCheck] = useState(false);
     const [addCheck, setAddCheck] = useState(false);
+    const [commentText, setComment] = useState("");
 
     const handleItemClick = (index) => {
         setActiveItem(index); // Устанавливаем активный элемент по индексу
@@ -51,6 +65,50 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
     const onAddCheck = () => {
         setAddCheck(!addCheck)
     }
+
+    const handleCommentSubmit = () => {
+        axios.post(`http://localhost:3000/task/${taskId}/comment`, {
+            date: new Date(),
+            text: commentText,
+        }, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                setComment("");
+                commentsQuery.refetch();
+            };
+        });
+    };
+
+    const handleCreateSub = () => {
+        axios.post(`http://localhost:3000/task/${taskId}/createSub`, {}, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                taskQuery.refetch();
+            };
+        });
+    };
+
+    const handleDeleteSub = () => {
+        axios.delete(`http://localhost:3000/task/${taskId}/subTasks`, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                taskQuery.refetch();
+            };
+        });
+    };
+
+    const handleCompleteChange = (id, currentState) => {
+        axios.get(`http://localhost:3000/task/${taskId}/sub/${id}/complete?state=${currentState}`, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                taskQuery.refetch();
+            };
+        });
+    };
+
+    const handleDeleteSubTask = (id) => {
+        axios.delete(`http://localhost:3000/task/${taskId}/sub/${id}`, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                taskQuery.refetch();
+            };
+        });
+    };
 
     useEffect(() => {
         if (!taskQuery.isLoading) {
@@ -151,14 +209,14 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                     />
                 </div>
 
-                {check ? (
+                {!taskQuery.isLoading && taskQuery.data.subTasks ? (
                     <div className="popup__check">
                         <div className="popup__check-header">
                             <div className="popup__members-btn popup__check-header-inner">
                                 <p className="popup__check-text">Чек-лист</p>
                             </div>
 
-                            <button className="popup__check-btn" onClick={onCreateCheck}>
+                            <button className="popup__check-btn" onClick={handleDeleteSub}>
                                 <p className="popup__check-btn-text">
                                     Удалить
                                 </p>
@@ -166,7 +224,7 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                         </div>
 
                         <ul className="popup__check-list">
-                            <li className="popup__check-item">
+                            {/* <li className="popup__check-item">
                                 <input className="popup__check-item-input" type='checkbox' id="check_input1"></input>
                                 <label className="popup__check-item-text" htmlFor='check_input1'>Стейт выделенных пользователей</label>
                                 <button className="check__item-delete">x</button>
@@ -176,7 +234,16 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                                 <input className="popup__check-item-input" type='checkbox' id="check_input2"></input>
                                 <label className="popup__check-item-text" htmlFor='check_input2'>Стейт lflflfl</label>
                                 <button className="check__item-delete">x</button>
-                            </li>
+                            </li> */}
+                            {
+                                !taskQuery.isLoading && taskQuery.data.subTasks.map((subTask) => (
+                                    <li key={subTask.id} className="popup__check-item">
+                                        <input onChange={() => { handleCompleteChange(subTask.id, subTask.completed); }} defaultChecked={subTask.completed} value={subTask.completed} className="popup__check-item-input" type='checkbox' id="check_input2"></input>
+                                        <label className="popup__check-item-text" htmlFor='check_input2'>{subTask.title}</label>
+                                        <button onClick={() => { handleDeleteSubTask(subTask.id); }} className="check__item-delete">x</button>
+                                    </li>
+                                ))
+                            }
 
 
                         </ul>
@@ -189,7 +256,7 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                     </div>
                 ) : (
                     <div className="popup__members">
-                        <button className="popup__members-btn popup__btn-check" onClick={onCreateCheck}>
+                        <button className="popup__members-btn popup__btn-check" onClick={handleCreateSub}>
                             <p className="popup__members-text">
                                 Создать чек-лист
                             </p>
@@ -205,9 +272,9 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                     <label className="popup__name-title popup__description-title" htmlFor='projectDescription'>
                         Комментарии
                     </label>
-                    <textarea className="popup__name-input popup__description-input popup__comments-input" id="projectDescription" type='text' placeholder='Напишите комментарий...'></textarea>
+                    <textarea onChange={(e) => { setComment(e.target.value); }} value={commentText} className="popup__name-input popup__description-input popup__comments-input" id="projectDescription" type='text' placeholder='Напишите комментарий...'></textarea>
                     <div className="popup__btns popup__confirm-btns popup__comments-btns">
-                        <button className="popup__btn popup__btn-add">
+                        <button onClick={handleCommentSubmit} className="popup__btn popup__btn-add">
                             <p className="popup__btn-text">
                                 Отправить
                             </p>
@@ -221,7 +288,12 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                 </div>
 
                 <div className="popup__comments-list">
-                    <div className="popup__list-item">
+                    {
+                        !commentsQuery.isLoading && commentsQuery.data.map((comment) => (
+                            <Comment key={comment.id} {...comment} />
+                        ))
+                    }
+                    {/* <div className="popup__list-item">
                         <img className="popup__list-img" src="../../../../public/images/avatarHeader.png"></img>
                         <div className="popup__list-inner">
                             <p className="popup__list-name">
@@ -264,13 +336,11 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                         <button className="popup__list-delete">
 
                         </button>
-                    </div>
+                    </div> */}
                 </div>
 
-                {addCheck && <PopupAddCheck onAddCheck={onAddCheck} />}
-                {openAddMemberTask && <PopupAddMemberTask onOpenAddMemberTask={onOpenAddMemberTask}/>}
-
-
+                {addCheck && <PopupAddCheck taskId={taskId} onAddCheck={onAddCheck} />}
+                {openAddMemberTask && <PopupAddMemberTask taskMembers={taskQuery.data?.assignedTo} onOpenAddMemberTask={onOpenAddMemberTask} />}
             </div>
         </div>
     )

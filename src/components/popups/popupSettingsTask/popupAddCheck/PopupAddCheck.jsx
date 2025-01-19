@@ -1,9 +1,23 @@
 import { useState } from 'react';
+import axios from 'axios';
+import { useQueryClient } from '@tanstack/react-query';
 
 import './popupAddCheck.scss'
 
-const PopupAddCheck = ({ onAddCheck }) => {
-            
+const PopupAddCheck = ({ onAddCheck, taskId }) => {
+    const client = useQueryClient();
+
+    const [subData, setData] = useState({ title: "" });
+
+    const handleSubmit = () => {
+        axios.post(`http://localhost:3000/task/${taskId}/sub`, subData, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                client.refetchQueries({ queryKey: ["task", taskId] });
+                onAddCheck();
+            };
+        });
+    };
+
     return (
         <div className='popup popup__confirm'>
             <div className='popup__wrapper popup__confirm-wrapper popup__addCheck'>
@@ -12,12 +26,12 @@ const PopupAddCheck = ({ onAddCheck }) => {
                         <label className="popup__name-title" htmlFor='projectName'>
                             Название подзадачи
                         </label>
-                        <input className="popup__name-input" id="projectName" type='text' placeholder='Напишите название...'></input>
+                        <input onChange={(e) => { setData({ title: e.target.value }) }} className="popup__name-input" id="projectName" type='text' placeholder='Напишите название...'></input>
                     </div>
                 </div>
 
                 <div className="popup__btns popup__confirm-btns">
-                    <button className="popup__btn popup__btn-add">
+                    <button onClick={handleSubmit} className="popup__btn popup__btn-add">
                         <p className="popup__btn-text">
                             Подтвердить
                         </p>

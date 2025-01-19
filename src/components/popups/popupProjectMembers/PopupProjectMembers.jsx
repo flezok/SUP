@@ -1,12 +1,13 @@
 import { } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useRouteLoaderData } from 'react-router-dom';
+import { useRouteLoaderData, useNavigate } from 'react-router-dom';
 
 import './popupProjectMembers.scss'
 
 const PopupProjectMembers = ({ onOpenProjectMembers, onEmployeePopup, projectId }) => {
     const { id: userId } = useRouteLoaderData("root");
+    const navigate = useNavigate();
 
     const membersQuery = useQuery({
         queryKey: ["projectMembers", projectId],
@@ -41,7 +42,7 @@ const PopupProjectMembers = ({ onOpenProjectMembers, onEmployeePopup, projectId 
                 <ul className="popup__add-items popup__items-members">
                     {
                         !membersQuery.isLoading && membersQuery.data.map((member) => (
-                            <li key={member.id} className="popup__add-item" >
+                            <li onClick={() => { navigate(`/employee/${member.id}`) }} key={member.id} className="popup__add-item" >
                                 <div className='popup__add-item-container' onClick={onEmployeePopup}>
                                     <div className="popup__add-item-wrapper">
                                         <img className="popup__add-item-img" src={member.avatarBase64}></img>

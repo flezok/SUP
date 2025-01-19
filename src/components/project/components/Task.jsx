@@ -1,7 +1,7 @@
 import { DateTime } from "luxon"
 import { useNavigate } from "react-router-dom"
 
-export default function Task({ title, description, dates, id }) {
+export default function Task({ title, description, dates, id, subTasks }) {
 
     const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ export default function Task({ title, description, dates, id }) {
                     Прогресс:
                 </p>
                 <p className="project__task-progress-count">
-                    0/6
+                    {subTasks && `${subTasks.filter((sub) => sub.completed).length}/${subTasks.length}`}
                 </p>
             </div>
             <div className='project__task-footer'>

@@ -2,8 +2,14 @@ import { useState } from 'react';
 
 import './popupConfirm.scss'
 
-const PopupConfirm = ({ onOpenConfirm, confirmTitle }) => {
-            
+const PopupConfirm = ({ onOpenConfirm, confirmTitle, handleProjectDelete }) => {
+
+    const doAction = () => {
+        if (confirmTitle === "удалить") {
+            handleProjectDelete();
+        };
+    };
+
     return (
         <div className='popup popup__confirm'>
             <div className='popup__wrapper popup__confirm-wrapper'>
@@ -12,7 +18,7 @@ const PopupConfirm = ({ onOpenConfirm, confirmTitle }) => {
                 </h3>
 
                 <div className="popup__btns popup__confirm-btns">
-                    <button className="popup__btn popup__btn-add">
+                    <button onClick={doAction} className="popup__btn popup__btn-add">
                         <p className="popup__btn-text">
                             Подтвердить
                         </p>

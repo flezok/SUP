@@ -21,6 +21,7 @@ import Registration from './components/registration/registration.jsx';
 import './normalize.scss'
 import './global.scss'
 import PopupSettingsTask from './components/popups/popupSettingsTask/PopupSettingsTask.jsx';
+import PopupSettingsProject from './components/popups/popupSettingsProject/PopupSettingsProject.jsx';
 
 const queryClient = new QueryClient();
 
@@ -106,6 +107,15 @@ const App = () => {
             errorElement: (<h1>Войдите в систему</h1>),
             children: [
                 {
+                    path: "/employee/:memberId",
+                    element: <PopupEmployee />,
+                    loader: async ({ params }) => {
+                        const { data } = await axios.get(`http://localhost:3000/user/${params.memberId}`, { withCredentials: true });
+
+                        return data;
+                    }
+                },
+                {
                     path: "/",
                     element: <Home />
                 },
@@ -124,6 +134,7 @@ const App = () => {
 
                         return data;
                     },
+                    id: "project",
                     element: <Project onOpenAddMember={onOpenAddMember}
                         openAddMember={openAddMember}
                         onOpenConfirm={onOpenConfirm}
@@ -138,6 +149,10 @@ const App = () => {
                         {
                             path: "task/:taskId",
                             element: <PopupSettingsTask />
+                        },
+                        {
+                            path: "settings",
+                            element: <PopupSettingsProject />
                         }
                     ]
                 },
@@ -180,7 +195,7 @@ const App = () => {
                     </Routes> */}
                 {isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose} />}
                 {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember} />}
-                {employeePopup && <PopupEmployee onEmployeePopup={onEmployeePopup} />}
+                {/* {employeePopup && <PopupEmployee onEmployeePopup={onEmployeePopup} />} */}
                 {/* </div>
             </BrowserRouter> */}
             </QueryClientProvider>

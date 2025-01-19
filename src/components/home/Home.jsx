@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './home.scss'
@@ -37,7 +37,7 @@ const Home = () => {
                             Предстоящие
                         </p>
                         <p className='tasks__item-count'>
-                            3/23 задач
+                            4/34 задач
                         </p>
                     </div>
 
@@ -47,7 +47,7 @@ const Home = () => {
                             Просроченные
                         </p>
                         <p className='tasks__item-count'>
-                            13/14 задач
+                            2/34 задач
                         </p>
                     </div>
 
@@ -57,7 +57,7 @@ const Home = () => {
                             Действующие
                         </p>
                         <p className='tasks__item-count'>
-                            23/34 задач
+                            30/34 задач
                         </p>
                     </div>
 
@@ -79,30 +79,30 @@ const Home = () => {
                     <div className="visit__item" onClick={onProjectClick}>
                         <img className='visit__item-img' src="../../../public/images/projectLast.jpg"></img>
                         <h3 className="visit__item-title">
-                            Супер проект 2025
+                            Проект по разработке
                         </h3>
                         <p className="visit__item-text">
-                            описание моего супер проекта по разработке супер приложения супер людьми
+                            Разработка фронтенд-части приложения включает реализацию пользовательского интерфейса на основе готового дизайна
                         </p>
                     </div>
 
                     <div className="visit__item" onClick={onProjectClick}>
-                        <img className='visit__item-img' src="../../../public/images/projectLast.jpg"></img>
+                        <img className='visit__item-img' src="../../../public/images/disigneImgjpg.jpg"></img>
                         <h3 className="visit__item-title">
-                            Супер проект 2025
+                            Проект по дизайну
                         </h3>
                         <p className="visit__item-text">
-                            описание моего супер проекта по разработке супер приложения супер людьми
+                                Дизайн охватывает разработку визуальной части приложения, включая структуру интерфейса, его элементы и общий стиль.
                         </p>
                     </div>
 
                     <div className="visit__item" onClick={onProjectClick}>
-                        <img className='visit__item-img' src="../../../public/images/projectLast.jpg"></img>
+                        <img className='visit__item-img' src="../../../public/images/backImg.png"></img>
                         <h3 className="visit__item-title">
-                            Супер проект 2025
+                            Серверная часть
                         </h3>
                         <p className="visit__item-text">
-                            описание моего супер проекта по разработке супер приложения супер людьми
+                            Разработка серверной части включает реализацию логики приложения на стороне сервера, обработку данных и их передачу между клиентом (фронтендом) и базой данных.
                         </p>
                     </div>
                 </div>

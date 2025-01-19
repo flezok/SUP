@@ -19,76 +19,42 @@ const PopupSearch = ({ onSearchPopupClose }) => {
                 <div className="popup__items">
                     <div className="popup__items">
                         <div className="popup__item">
-                            <img className="popup__item-img" src="../../../../public/images/searchImg.png"></img>
+                            <img className="popup__item-img" src="../../../../public/images/projectLast.jpg"></img>
                             <div className='popup__item-inner'>
                                 <p className="popup__item-task">
-                                    Задача А
+                                    Реализовать модальное окно добавления пользователя
                                 </p>
                                 <p className='popup__item-project'>
-                                    Разработка приложения
+                                    Проект по разработке
                                 </p>
                             </div>
                         </div>
 
                         <div className="popup__item">
-                            <img className="popup__item-img" src="../../../../public/images/searchImg.png"></img>
+                            <img className="popup__item-img" src="../../../../public/images/disigneImgjpg.jpg"></img>
                             <div className='popup__item-inner'>
                                 <p className="popup__item-task">
-                                    Задача А
+                                    Дизайн модального окна добавления пользователя
                                 </p>
                                 <p className='popup__item-project'>
-                                    Разработка приложения
+                                Проект по дизайну
                                 </p>
                             </div>
                         </div>
 
                         <div className="popup__item">
-                            <img className="popup__item-img" src="../../../../public/images/searchImg.png"></img>
+                            <img className="popup__item-img" src="../../../../public/images/backImg.png"></img>
                             <div className='popup__item-inner'>
                                 <p className="popup__item-task">
-                                    Задача А
+                                    Загрузить данные в модальное окно добавления пользователя
                                 </p>
                                 <p className='popup__item-project'>
-                                    Разработка приложения
+                                    Серверная часть
                                 </p>
                             </div>
                         </div>
 
-                        <div className="popup__item">
-                            <img className="popup__item-img" src="../../../../public/images/searchImg.png"></img>
-                            <div className='popup__item-inner'>
-                                <p className="popup__item-task">
-                                    Задача А
-                                </p>
-                                <p className='popup__item-project'>
-                                    Разработка приложения
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="popup__item">
-                            <img className="popup__item-img" src="../../../../public/images/searchImg.png"></img>
-                            <div className='popup__item-inner'>
-                                <p className="popup__item-task">
-                                    Задача А
-                                </p>
-                                <p className='popup__item-project'>
-                                    Разработка приложения
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="popup__item">
-                            <img className="popup__item-img" src="../../../../public/images/searchImg.png"></img>
-                            <div className='popup__item-inner'>
-                                <p className="popup__item-task">
-                                    Задача А
-                                </p>
-                                <p className='popup__item-project'>
-                                    Разработка приложения
-                                </p>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

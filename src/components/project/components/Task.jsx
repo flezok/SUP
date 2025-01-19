@@ -7,7 +7,7 @@ export default function Task({ title, description, dates, id, subTasks }) {
 
     return (
         <div onClick={() => { navigate(`task/${id}`); }} className="project__task">
-            <img className="project__task-img" src="../../../public/images/task.png"></img>
+            {/* <img className="project__task-img" src="../../../public/images/task.png"></img> */}
             <div className="project__task-deadline">
                 <p className="project__task-deadline-text">
                     {DateTime.fromISO(dates[1]).setLocale("ru").toFormat("dd LLL yyyy")}

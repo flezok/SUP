@@ -1,9 +1,9 @@
-import {  } from 'react';
+import { } from 'react';
 import { useRouteLoaderData } from "react-router-dom";
 
 import './header.scss'
 
-const Header = ({ onSearchPopupOpen, onOpenCreateProject }) => {
+const Header = ({ onSearchPopupOpen, onOpenCreateProject, setQuery }) => {
 
     const data = useRouteLoaderData("root");
 
@@ -22,9 +22,10 @@ const Header = ({ onSearchPopupOpen, onOpenCreateProject }) => {
                 <div className='header__container'>
                     <div className='header__search-wrapper'>
                         <input className="header__search"
-                               type="text" 
-                               placeholder='Поиск задачи'
-                               onFocus={onSearchPopupOpen}></input>
+                            type="text"
+                            placeholder='Поиск задачи'
+                            onChange={(e) => { setQuery(e.target.value) }}
+                            onFocus={onSearchPopupOpen}></input>
                     </div>
 
                     <div className='header__container-wrapper'>

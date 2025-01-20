@@ -17,6 +17,7 @@ import PopupSearch from './components/popups/popupSearch/popupSearch.jsx';
 import PopupCreateProject from './components/popups/popupCreateProject/PopupCreateProject.jsx';
 import PopupEmployee from './components/popups/popupEmployee/PopupEmployee.jsx';
 import Registration from './components/registration/registration.jsx';
+import { useQuery } from '@tanstack/react-query';
 
 import './normalize.scss'
 import './global.scss'
@@ -34,13 +35,15 @@ const App = () => {
     const [openProjectMembers, setOpenProjectMembers] = useState(false);
     const [confirmTitle, setConfirmTitle] = useState('');
     const [openSettingsProject, setOpenSettingsProject] = useState(false);
-
+    const [queryString, setQuery] = useState("");
 
     const onSearchPopupOpen = () => {
+        setQuery("");
         setIsFocusedSearch(true);
     };
 
     const onSearchPopupClose = () => {
+        setQuery("");
         setIsFocusedSearch(false);
     };
 
@@ -96,7 +99,7 @@ const App = () => {
             },
             element: (
                 <>
-                    <Header onSearchPopupOpen={onSearchPopupOpen}
+                    <Header setQuery={setQuery} onSearchPopupOpen={onSearchPopupOpen}
                         onOpenCreateProject={onOpenCreateProject} />
                     <div className="container">
                         <Menu />
@@ -158,6 +161,10 @@ const App = () => {
                 },
                 {
                     path: "employees",
+                    loader: async () => {
+                        const { data } = await axios.get("http://localhost:3000/user/positions", { withCredentials: true });
+                        return data;
+                    },
                     element: <Employees onEmployeePopup={onEmployeePopup} />
                 }
             ]
@@ -193,7 +200,7 @@ const App = () => {
                                                  onEmployeePopup={onEmployeePopup}/>} />
                         <Route path="/employees" element={<Employees onEmployeePopup={onEmployeePopup}/>} />
                     </Routes> */}
-                {isFocusedSearch && <PopupSearch onSearchPopupClose={onSearchPopupClose} />}
+                {isFocusedSearch && <PopupSearch queryString={queryString} onSearchPopupClose={onSearchPopupClose} />}
                 {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember} />}
                 {/* {employeePopup && <PopupEmployee onEmployeePopup={onEmployeePopup} />} */}
                 {/* </div>

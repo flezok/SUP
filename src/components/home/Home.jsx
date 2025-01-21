@@ -15,7 +15,7 @@ const Home = () => {
     };
 
     return (
-        <section>
+        <section className="home">
             <div className='tasks'>
                 <h2 className="tasks__title">
                     Мои задачи

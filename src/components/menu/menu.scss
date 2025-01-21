@@ -73,3 +73,13 @@
         }
     }
 }
+
+@media (max-width: 400px){
+    .menu{
+        position: absolute;
+        z-index: 333;
+        width: 200px;
+
+        display: none;
+    }
+}

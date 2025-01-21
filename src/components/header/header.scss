@@ -132,5 +132,101 @@
         }
     }
 
+    .comnamy__menu-media{
+        border: none;
+        background-color: transparent;
+        display: none;
+        cursor: pointer;
+    }
+
     
+}
+
+@media (max-width: 400px){
+    .header{
+        height: 40px;
+        background-color: #2e2e2e;
+
+        .company__logo{
+            display: none;
+        }
+
+        .comnamy__menu-media{
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            justify-content: center;
+
+            &::before{
+                content: url('../../../public/images/burger.svg');
+            }
+        }
+
+        &__company{
+            height: 100%;
+            margin-right: 0;
+
+            .company__wrapper{
+                width: 100%;
+                height: 100%;
+                margin-right: 0;
+            }
+        }
+
+        &__container{
+            height: 100%;
+            padding: 2px 0;
+            width: 80%;
+
+            .header__btn{
+                width: 100%;
+                height: 100%;
+                margin-right: 0;
+                border-radius: 0;
+
+                &-text{
+                    padding: 0;
+                    font-size: 12px;
+                    line-height: 100%;
+                    text-align: center;
+                    width: 120%;
+
+                    &::before{
+                        display: none;
+                    }
+                }
+            }
+
+            .header__avatar{
+                display: none;
+            }
+
+            .header__search-wrapper{
+                width: 70%;
+            }
+            
+
+            .header__search{
+                padding: 2px 6px;
+                height: 100%;
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .header__search-wrapper::before {
+               display: none;
+            }
+
+            .header__container-wrapper{
+                width: 30%;
+            }
+        }
+
+        .company__name{
+            display: none;
+        }
+
+        
+    }
 }

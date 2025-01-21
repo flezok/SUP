@@ -13,6 +13,7 @@ const Header = ({ onSearchPopupOpen, onOpenCreateProject, setQuery }) => {
                 <div className="header__company">
                     <div className='company__wrapper'>
                         <img className='company__logo' alt='логотип компании' src="../../public/images/logoHeader.png"></img>
+                        <button className="comnamy__menu-media"></button>
                     </div>
                     <p className='company__name'>
                         Новая Глава

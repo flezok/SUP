@@ -48,3 +48,4 @@ export default function ProjectBoard({ title, description, id, projectAvatar, is
         </div>
     );
 };
+

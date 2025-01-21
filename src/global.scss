@@ -55,3 +55,9 @@ body{
 .container{
     display: flex;
 }
+
+@media (max-width: 400px){
+    body{
+        padding: 0;
+    }
+}

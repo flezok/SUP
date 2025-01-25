@@ -1,8 +1,11 @@
 import './report.scss'
 
+import { useLoaderData } from 'react-router-dom'
+
 const Report = ({ }) => {
 
-    
+    const reportData = useLoaderData();
+    console.log(reportData);
 
     return (
         <section className='report'>
@@ -20,7 +23,7 @@ const Report = ({ }) => {
                             Всего проектов:
                         </p>
                         <p className="report__item-text">
-                            25
+                            {reportData.length}
                         </p>
                     </div>
 
@@ -29,7 +32,7 @@ const Report = ({ }) => {
                             Активных проектов:
                         </p>
                         <p className="report__item-text">
-                            25
+                            {reportData.filter((project) => !project.completed).length}
                         </p>
                     </div>
 
@@ -38,7 +41,7 @@ const Report = ({ }) => {
                             Завершенных проектов:
                         </p>
                         <p className="report__item-text">
-                            25
+                            {reportData.filter((project) => project.completed).length}
                         </p>
                     </div>
                 </div>
@@ -54,7 +57,10 @@ const Report = ({ }) => {
                             Всего задач:
                         </p>
                         <p className="report__item-text">
-                            25
+                            {reportData.reduce(
+                                (acc, curr) => acc + curr.totalTasks,
+                                0
+                            )}
                         </p>
                     </div>
 
@@ -63,7 +69,10 @@ const Report = ({ }) => {
                             Активных задач:
                         </p>
                         <p className="report__item-text">
-                            25
+                            {reportData.reduce(
+                                (acc, curr) => acc + curr.notCompletedTasks,
+                                0
+                            )}
                         </p>
                     </div>
 
@@ -72,199 +81,218 @@ const Report = ({ }) => {
                             Завершенных задач:
                         </p>
                         <p className="report__item-text">
-                            25
+                            {reportData.reduce(
+                                (acc, curr) => acc + curr.completedTasks,
+                                0
+                            )}
                         </p>
                     </div>
                 </div>
             </div>
 
             <h3 className="report__container-title report__title-projects">
-                    Список проектов
+                Список проектов
             </h3>
 
-                
 
-                <div className="employee__projects">
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
+
+            <div className="employee__projects">
+                {
+                    reportData.length > 0 && reportData.map((project) => (
+                        <div key={project.id} className="employee__project">
+                            <div className="employee__project-name">
+                                <img className="employee__project-img" src={project.projectAvatar}></img>
+                                <p className='employee__project-text'>{project.title}</p>
+                            </div>
+
+                            <p className="employee__project-post">Участников: {project.members}</p>
+
+                            <div className="employee__project-task">
+                                <p className="employee__project-task-text">{project.completedTasks}/{project.totalTasks}</p>
+                            </div>
                         </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
+                    ))
+                }
+                {/* <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
                     </div>
 
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
+                    <p className="employee__project-post">Участников: 22</p>
 
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
-                    </div>
-                    <div className="employee__project">
-                        <div className="employee__project-name">
-                            <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
-                            <p className='employee__project-text'>Проект А</p>
-                        </div>
-
-                        <p className="employee__project-post">Участников: 22</p>
-
-                        <div className="employee__project-task">
-                            <p className="employee__project-task-text">7/14</p>
-                        </div>
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
                     </div>
                 </div>
-                
-            
+
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div>
+                <div className="employee__project">
+                    <div className="employee__project-name">
+                        <img className="employee__project-img" src="../../../../public/images/projectLast.jpg"></img>
+                        <p className='employee__project-text'>Проект А</p>
+                    </div>
+
+                    <p className="employee__project-post">Участников: 22</p>
+
+                    <div className="employee__project-task">
+                        <p className="employee__project-task-text">7/14</p>
+                    </div>
+                </div> */}
+            </div>
+
+
         </section>
     )
 

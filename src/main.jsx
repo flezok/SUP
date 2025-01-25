@@ -133,7 +133,11 @@ const App = () => {
                 },
                 {
                     path: "/report",
-                    element: <Report />
+                    element: <Report />,
+                    loader: async () => {
+                        const { data } = await axios.get("http://localhost:3000/project/report", { withCredentials: true });
+                        return data;
+                    }
                 },
                 {
                     path: "/project/:projectId",

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useLoaderData } from 'react-router-dom';
+import { useNavigate, useLoaderData, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -48,9 +48,20 @@ const Boards = ({ }) => {
 
     return (
         <section className='boards'>
-            <h2 className='account__title'>
-                Доска проектов
-            </h2>
+
+            <div className="boards__container">
+                <h2 className='account__title'>
+                    Доска проектов
+                </h2>
+
+                <Link className="boards__btn" to='../report'>
+                    <p className="boards__btn-text">
+                        Создать отчет
+                    </p>
+                </Link>
+            </div>
+
+            
 
             <div className="boards__wrapper">
                 <div className='boards__inner boards__follow'>

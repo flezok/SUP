@@ -1,8 +1,42 @@
 .boards {
     width: 76%;
 
-    &__wrapper {
-        
+    &__container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__btn{
+        border-radius: 15px;
+        width: 250px;
+        height: 35px;
+        margin-right: 41px;
+        position: relative;
+        background-color: transparent;
+        cursor: pointer;
+        border: 1px solid #d2d2d2;
+        text-align: left;
+        margin-right: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &-text{
+            font-family: "Manrope-Bold", sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 100%;
+            color: #fff;
+            // padding-left: 48px;
+
+            &::before {
+                content: url('');
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                left: 16px;
+            }
+        }
     }
 
     &__inner {

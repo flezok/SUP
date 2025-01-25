@@ -47,6 +47,14 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
         })
     };
 
+    const handleTaskComplete = (status) => {
+        axios.get(`http://localhost:3000/task/${taskId}/complete?status=${status}`, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                taskQuery.refetch();
+            };
+        });
+    };
+
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
     const [activeItem, setActiveItem] = useState(taskQuery.data?.priority - 1); // По умолчанию активен первый элемент
@@ -207,6 +215,14 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                         }}
                         isClearable={true}
                     />
+                </div>
+
+                <div className="popup__settingsProject-btn popup__settingsTask-btn">
+                    <button onClick={() => { handleTaskComplete(taskQuery.data?.completed); }} className="popup__members-btn settingsProject__btn-finish">
+                        <p className="popup__members-text">
+                            Завершить задачу
+                        </p>
+                    </button>
                 </div>
 
                 {!taskQuery.isLoading && taskQuery.data.subTasks ? (

@@ -3,10 +3,12 @@ import { useLoaderData } from 'react-router-dom';
 import './employees.scss';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Employees = ({ onEmployeePopup }) => {
 
     const positions = useLoaderData();
+    const navigate = useNavigate();
 
     const [activeTab, setActiveTab] = useState(positions[0]);
 
@@ -49,7 +51,7 @@ const Employees = ({ onEmployeePopup }) => {
                     <div className="employees__items">
                         {
                             !membersQuery.isLoading && membersQuery.data?.map((member) => (
-                                <div className="boards__item" key={member.id} onClick={onEmployeePopup}>
+                                <div onClickCapture={() => { navigate(`/employee/${member.id}`) }} className="boards__item" key={member.id} onClick={onEmployeePopup}>
                                     <div className="boards__item-wrapper">
                                         <img className="boards__item-img" src={member.avatarBase64} alt="Фото сотрудника" />
                                     </div>

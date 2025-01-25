@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet, redirect } from 'react-router-dom';
 import axios from 'axios';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 
 import Authorization from './components/authorization/Authorization';
@@ -17,7 +18,7 @@ import PopupSearch from './components/popups/popupSearch/popupSearch.jsx';
 import PopupCreateProject from './components/popups/popupCreateProject/PopupCreateProject.jsx';
 import PopupEmployee from './components/popups/popupEmployee/PopupEmployee.jsx';
 import Registration from './components/registration/registration.jsx';
-import { useQuery } from '@tanstack/react-query';
+import Report from './components/report/Report.jsx';
 
 import './normalize.scss'
 import './global.scss'
@@ -129,6 +130,10 @@ const App = () => {
                 {
                     path: "/boards",
                     element: <Boards />
+                },
+                {
+                    path: "/report",
+                    element: <Report />
                 },
                 {
                     path: "/project/:projectId",

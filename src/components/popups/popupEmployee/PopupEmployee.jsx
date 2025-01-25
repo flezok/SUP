@@ -14,7 +14,7 @@ const PopupEmployee = ({ onEmployeePopup }) => {
         queryKey: ["userProjects", userData.id],
         queryFn: async () => {
             const { data } = await axios.get(`http://localhost:3000/user/${userData.id}/projects`, { withCredentials: true });
-
+            console.log(data);
             return data;
         }
     })
@@ -59,7 +59,7 @@ const PopupEmployee = ({ onEmployeePopup }) => {
                                 <p className="employee__project-post">{userData.position}</p>
 
                                 <div className="employee__project-task">
-                                    <p className="employee__project-task-text">{project.projectTasks.flat().filter(Boolean).length}/{project.projectTasks.flat().length}</p>
+                                    <p className="employee__project-task-text">{project.completedTasks}/{project.projectTasks}</p>
                                 </div>
                             </div>
                         ))

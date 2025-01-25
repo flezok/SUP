@@ -233,6 +233,16 @@
     &:hover .popup__list-delete{
         display: block;
     }
+
+    
+}
+
+.popup__settingsTask-btn{
+    margin-bottom: 36px;
+
+    .popup__members-text::before{
+        content: url('../../../../public/images/finish.svg');
+    }
 }
 
 // .popup__list-item:hover .popup__list-delete{

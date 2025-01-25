@@ -125,7 +125,7 @@ const PopupSettingsProject = ({ onOpenSettingsProject, onOpenConfirm, openConfir
                 <div className="popup__btns">
                     <button onClick={handleProjectEdit} className="popup__btn popup__btn-add">
                         <p className="popup__btn-text">
-                            Создать
+                            Сохранить
                         </p>
                     </button>
                     <button className="popup__btn popup__btn-cancel" onClick={() => { navigate(-1); }}>

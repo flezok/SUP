@@ -46,6 +46,15 @@ const PopupSettingsProject = ({ onOpenSettingsProject, onOpenConfirm, openConfir
         });
     };
 
+    const handleProjectComplete = () => {
+        axios.get(`http://localhost:3000/project/${projectData.id}/complete?status=${projectData.complete}`, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                revalidator.revalidate();
+                navigate(`/project/${projectData.id}`);
+            };
+        })
+    };
+
     const handleProjectDelete = () => {
         axios.delete(`http://localhost:3000/project/${projectData.id}`, { withCredentials: true }).then((res) => {
             if (res.data.success) {
@@ -137,7 +146,7 @@ const PopupSettingsProject = ({ onOpenSettingsProject, onOpenConfirm, openConfir
 
             </div>
 
-            {confirmOpened && <PopupConfirm handleProjectDelete={handleProjectDelete} onOpenConfirm={() => { setConfirm((prev) => !prev); }} confirmTitle={confirmTitle} />}
+            {confirmOpened && <PopupConfirm handleProjectComplete={handleProjectComplete} handleProjectDelete={handleProjectDelete} onOpenConfirm={() => { setConfirm((prev) => !prev); }} confirmTitle={confirmTitle} />}
         </div>
     )
 

@@ -2,11 +2,13 @@ import { useState } from 'react';
 
 import './popupConfirm.scss'
 
-const PopupConfirm = ({ onOpenConfirm, confirmTitle, handleProjectDelete }) => {
+const PopupConfirm = ({ onOpenConfirm, confirmTitle, handleProjectDelete, handleProjectComplete }) => {
 
     const doAction = () => {
         if (confirmTitle === "удалить") {
             handleProjectDelete();
+        } else if (confirmTitle === "завершить") {
+            handleProjectComplete();
         };
     };
 

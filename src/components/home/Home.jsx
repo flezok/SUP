@@ -24,7 +24,7 @@ const Home = () => {
                     <div className="tasks__item tasks__item-priority">
                         <img className='tasks__item-img' src="../../../public/images/priority.png"></img>
                         <p className='tasks__item-name'>
-                            Приоритетные
+                            Название доски
                         </p>
                         <p className='tasks__item-count'>
                             23/34 задач
@@ -34,7 +34,7 @@ const Home = () => {
                     <div className="tasks__item tasks__item-upcoming">
                         <img className='tasks__item-img' src="../../../public/images/upcoming.png"></img>
                         <p className='tasks__item-name'>
-                            Предстоящие
+                            Название доски2
                         </p>
                         <p className='tasks__item-count'>
                             4/34 задач
@@ -44,7 +44,7 @@ const Home = () => {
                     <div className="tasks__item tasks__item-overdue">
                         <img className='tasks__item-img' src="../../../public/images/overdue.png"></img>
                         <p className='tasks__item-name'>
-                            Просроченные
+                            Название доски3
                         </p>
                         <p className='tasks__item-count'>
                             2/34 задач
@@ -54,12 +54,23 @@ const Home = () => {
                     <div className="tasks__item tasks__item-pending">
                         <img className='tasks__item-img' src="../../../public/images/pending.png"></img>
                         <p className='tasks__item-name'>
-                            Действующие
+                            Название доски4
                         </p>
                         <p className='tasks__item-count'>
                             30/34 задач
                         </p>
                     </div>
+
+                    <div className="tasks__item tasks__item-pending">
+                        <img className='tasks__item-img' src="../../../public/images/pending.png"></img>
+                        <p className='tasks__item-name'>
+                            Название доски4
+                        </p>
+                        <p className='tasks__item-count'>
+                            30/34 задач
+                        </p>
+                    </div>
+                    
 
 
                 </div>
@@ -68,7 +79,7 @@ const Home = () => {
             <div className="visit">
                 <div className="visit__header">
                     <h2 className="visit__header-title">
-                        Последние проекты
+                        Последние доски
                     </h2>
                     <p className="visit__header-link" onClick={onBoardsClick}>
                         Все доски

@@ -225,6 +225,14 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                     </button>
                 </div>
 
+                <div className="popup__settingsProject-btn">
+                    <button className="popup__members-btn settingsProject__btn-delete">
+                        <p className="popup__members-text">
+                            Удалить задачу
+                        </p>
+                    </button>
+                </div>
+
                 {!taskQuery.isLoading && taskQuery.data.subTasks ? (
                     <div className="popup__check">
                         <div className="popup__check-header">

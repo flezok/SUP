@@ -245,6 +245,26 @@
     }
 }
 
+.popup__task{
+
+    .settingsProject__btn-delete{
+        border-color: #d00101;
+        // background-color: #851616;
+        margin-bottom: 36px;
+    
+        .popup__members-text{
+            color: #d00101;
+    
+            &::before{
+                content: url('../../../../public/images/delete.svg');
+            }
+        }
+    }
+
+}
+
+
+
 // .popup__list-item:hover .popup__list-delete{
 //         display: block
 //     }

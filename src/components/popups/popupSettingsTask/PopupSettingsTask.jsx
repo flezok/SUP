@@ -55,6 +55,14 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
         });
     };
 
+    const handleTaskDelete = () => {
+        axios.delete(`http://localhost:3000/task/${taskId}`, { withCredentials: true }).then((res) => {
+            if (res.data.success) {
+                taskQuery.refetch();
+            };
+        });
+    };
+
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
     const [activeItem, setActiveItem] = useState(taskQuery.data?.priority - 1); // По умолчанию активен первый элемент
@@ -73,6 +81,8 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
     const onAddCheck = () => {
         setAddCheck(!addCheck)
     }
+
+    
 
     const handleCommentSubmit = () => {
         axios.post(`http://localhost:3000/task/${taskId}/comment`, {
@@ -117,6 +127,8 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
             };
         });
     };
+
+    
 
     useEffect(() => {
         if (!taskQuery.isLoading) {
@@ -226,7 +238,7 @@ const PopupSettingsTask = ({ onOpenSettingsTask, onOpenAddMember, openAddMember 
                 </div>
 
                 <div className="popup__settingsProject-btn">
-                    <button className="popup__members-btn settingsProject__btn-delete">
+                    <button className="popup__members-btn settingsProject__btn-delete" onClick={handleTaskDelete}>
                         <p className="popup__members-text">
                             Удалить задачу
                         </p>

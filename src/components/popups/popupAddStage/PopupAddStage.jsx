@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RgbaStringColorPicker } from "react-colorful";
 import axios from 'axios';
+import DatePicker from "react-datepicker";
 
 
 import './popupAddStage.scss'
@@ -10,6 +11,8 @@ const PopupAddStage = ({ onOpenCreateStage, projectId, stagesQuery }) => {
     const [colorStage, setColorStage] = useState("rgba(255, 255, 255, 1)");
     const [pickColor, setPickColor] = useState(false);
     const [title, setTitle] = useState("Этап");
+    const [dateRange, setDateRange] = useState([null, null]);
+    const [startDate, endDate] = dateRange;
 
     const onChangeColor = (newColor) => {
         setColorStage(newColor);
@@ -31,6 +34,7 @@ const PopupAddStage = ({ onOpenCreateStage, projectId, stagesQuery }) => {
             };
         });
     };
+    
 
     return (
         <div className='popup'>
@@ -59,6 +63,24 @@ const PopupAddStage = ({ onOpenCreateStage, projectId, stagesQuery }) => {
                             <RgbaStringColorPicker onChange={(newColor) => onChangeColor(newColor)} />
                         </div>}
                     </div>
+                </div>
+
+                <div className='popup__deadline'>
+                    <label className="popup__deadline-btn popup__members-btn" htmlFor="date">
+                        <p className="popup__deadline-text popup__members-text">
+                            Выбрать даты
+                        </p>
+                    </label>
+                    <DatePicker
+                        id="date"
+                        selectsRange={true}
+                        startDate={startDate}
+                        endDate={endDate}
+                        onChange={(update) => {
+                            setDateRange(update);
+                        }}
+                        isClearable={true}
+                    />
                 </div>
 
                 <div className="popup__btns">

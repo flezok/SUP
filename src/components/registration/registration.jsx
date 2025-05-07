@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import RegistrationSuccess from './registrationSuccess/registrationSuccess';
 
 import '../authorization/authorization.scss'
 import './registration.scss'
@@ -10,6 +11,7 @@ const Registration = () => {
     // const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [formState, setForm] = useState({ email: "", firstName: "", lastName: "", middleName: "", password: "", number: "" })
+    const [success, setSuccess] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
@@ -19,9 +21,14 @@ const Registration = () => {
         e.preventDefault();
         axios.post("http://localhost:3000/user/register", formState).then((res) => {
             if (res.data.success) {
-                navigate("/auth");
+                // navigate("/auth");
+                setSuccess(true)
             }
         });
+    }
+
+    const closeSuccess = () => {
+        setSuccess(false);
     }
 
     return (
@@ -65,6 +72,7 @@ const Registration = () => {
                     </button>
                 </form>
             </div>
+            {success && <RegistrationSuccess closeSuccess={closeSuccess}/>}
         </div>
     )
 

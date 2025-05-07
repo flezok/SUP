@@ -19,6 +19,7 @@ import PopupCreateProject from './components/popups/popupCreateProject/PopupCrea
 import PopupEmployee from './components/popups/popupEmployee/PopupEmployee.jsx';
 import Registration from './components/registration/registration.jsx';
 import Report from './components/report/Report.jsx';
+import PopupNoAccess from './components/popups/popupNoAccess/popupNoAccess.jsx';
 
 import './normalize.scss'
 import './global.scss'
@@ -37,6 +38,11 @@ const App = () => {
     const [confirmTitle, setConfirmTitle] = useState('');
     const [openSettingsProject, setOpenSettingsProject] = useState(false);
     const [queryString, setQuery] = useState("");
+    const [noAccess, setNoAccess] = useState(true);
+
+    const onCloseNoAccess = () => {
+        setNoAccess(false);
+    }
 
     const onSearchPopupOpen = () => {
         setQuery("");
@@ -211,6 +217,7 @@ const App = () => {
                     </Routes> */}
                 {isFocusedSearch && <PopupSearch queryString={queryString} onSearchPopupClose={onSearchPopupClose} />}
                 {createProject && <PopupCreateProject onOpenCreateProject={onOpenCreateProject} onOpenAddMember={onOpenAddMember} openAddMember={openAddMember} />}
+                {noAccess && <PopupNoAccess  onCloseNoAccess={onCloseNoAccess}/>}
                 {/* {employeePopup && <PopupEmployee onEmployeePopup={onEmployeePopup} />} */}
                 {/* </div>
             </BrowserRouter> */}

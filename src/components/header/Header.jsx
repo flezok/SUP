@@ -2,10 +2,17 @@ import { } from 'react';
 import { useRouteLoaderData } from "react-router-dom";
 
 import './header.scss'
+import axios from 'axios';
 
 const Header = ({ onSearchPopupOpen, onOpenCreateProject, setQuery }) => {
 
     const data = useRouteLoaderData("root");
+
+    const getUserFromServer = () => {
+        axios.get("http://localhost:3000/user/check", { withCredentials: true }).then((res) => {
+            console.log(res.data);
+        });
+    };
 
     return (
         <>
@@ -15,7 +22,7 @@ const Header = ({ onSearchPopupOpen, onOpenCreateProject, setQuery }) => {
                         <img className='company__logo' alt='логотип компании' src="../../public/images/logoHeader.png"></img>
                         <button className="comnamy__menu-media"></button>
                     </div>
-                    <p className='company__name'>
+                    <p className='company__name' onClick={getUserFromServer}>
                         Новая Глава
                     </p>
                 </div>
